@@ -19,7 +19,7 @@ public class Framerate : MonoBehaviour
         }
         else
         {
-            float lastFramerate = frameCounter / timeCounter;
+            var lastFramerate = frameCounter / timeCounter;
             frameCounter = 0;
             timeCounter = 0.0f;
             framerateText.text = $"FPS: {lastFramerate:n1}";

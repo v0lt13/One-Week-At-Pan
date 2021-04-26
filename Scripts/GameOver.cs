@@ -17,7 +17,8 @@ public class GameOver : MonoBehaviour
         "GIT GUD",
         "Look on cams to see the position of the animatronics",
         "Dont die",
-        "Feedback from our studies have indicated that if you utilize your brain it's much easier to play this game"
+        "Feedback from our studies have indicated that if you utilize your brain it's much easier to play this game",
+        "If you see a small light flicker in the room that means an animatronic is at the door"
     };
 
     [Header ("Compenets:")]

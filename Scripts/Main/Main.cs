@@ -47,6 +47,10 @@ public class Main : MonoBehaviour
         PlayerPrefs.DeleteKey("camName");
 
         SetAIlevel();
+
+        print(PanAI.PanAIlevel);
+        print(MikeyAI.MikeyAIlevel);
+        print(TravisAI.TravisAILevel);
     }
 
     void Start()
@@ -59,6 +63,7 @@ public class Main : MonoBehaviour
         panAI = panObject.GetComponent<PanAI>();
 
         amountOfTime = 360f;
+        nightHour = 12;
 
         Invoke(nameof(ActivateCallButton), 7f);
         Invoke(nameof(RemoveCallButton), 30f);
@@ -71,13 +76,13 @@ public class Main : MonoBehaviour
         NightTime();
 
         // Used to skip the nights, DEBUG ONLY
-        if (Input.GetKey(KeyCode.LeftShift))
+        /*if (Input.GetKey(KeyCode.LeftShift))
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SceneManager.LoadScene("6AM");
             }
-        }
+        }*/
 
 		if (PauseMenu.isPaused && !isPhoneCallMuted)
 		{

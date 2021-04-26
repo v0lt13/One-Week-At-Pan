@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 public class Night2 : MonoBehaviour
 {
+    [Header ("Variables:")]
     [HideInInspector] public bool isOvenOn = true;
+    [SerializeField] [Range(1f, 10f)] private float heatChargerDecreaseSpeed;
+    [SerializeField] [Range(1f, 10f)] private float heatChargerIncreaseSpeed;
     private int heKnowsHowUseLights = 0;
     private bool isHoveredOverChargeButton = false;
 
@@ -83,16 +86,6 @@ public class Night2 : MonoBehaviour
         }
     }
 
-    public void OnPointerEnterChargeValue()
-    {
-        isHoveredOverChargeButton = true;
-    }
-
-    public void OnPointerExitChargeValue()
-    {
-        isHoveredOverChargeButton = false;
-    }
-
     private void EnableCameraLight(int camera)
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && cameraSys.isCameraActive)
@@ -109,6 +102,16 @@ public class Night2 : MonoBehaviour
         {
             cameraLights[camera].SetActive(false);
         }
+    }
+
+    public void OnPointerEnterChargeButton()
+    {
+        isHoveredOverChargeButton = true;
+    }
+
+    public void OnPointerExitChargeButton()
+    {
+        isHoveredOverChargeButton = false;
     }
 
     private void ActivateHeatChargers()
@@ -131,20 +134,12 @@ public class Night2 : MonoBehaviour
 
     private void DecreaseHeatSliderValue()
     {
-        heatSlider.value -= Time.deltaTime * 3;
+        heatSlider.value -= Time.deltaTime * heatChargerDecreaseSpeed;
     }
 
     private void IncreaseHeatSliderValue()
     {
-        heatSlider.value += Time.deltaTime * 7;
-    }
-
-    public void DisableCameraLight()
-    {
-        foreach (var light in cameraLights)
-        {
-            light.SetActive(false);
-        }
+        heatSlider.value += Time.deltaTime * heatChargerIncreaseSpeed;
     }
 
     private bool IsChargeButtonPressed()
@@ -156,6 +151,14 @@ public class Night2 : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void DisableCameraLight()
+    {
+        foreach (var light in cameraLights)
+        {
+            light.SetActive(false);
         }
     }
 }

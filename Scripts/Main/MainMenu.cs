@@ -123,54 +123,6 @@ public class MainMenu : MonoBehaviour
 		}
     }
 
-    public void NewGame()
-    {
-        SceneManager.LoadScene("Night01S");
-        PlayerPrefs.SetInt("Night", 1);
-    }
-
-    public void Continue()
-	{
-        PlayerPrefs.SetInt("Night", 2);
-
-        switch (PlayerPrefs.GetInt("Night"))
-        {
-            case 2:
-                SceneManager.LoadScene("Night02S");
-                break;
-
-            default:
-                SceneManager.LoadScene("Night02S");
-                break;
-        }
-    }
-
-    public void Options()
-    {
-        isMenu = false;
-
-		foreach (var arrow in buttonPointer.arrows)
-		{
-            arrow.SetActive(false);
-		}
-
-        optionsObjects.SetActive(true);
-        mainMenuObjects.SetActive(false);
-    }
-
-    public void Menu()
-    {
-        isMenu = true;
-
-        foreach (var arrow in buttonPointer.arrows)
-        {
-            arrow.SetActive(false);
-        }
-
-        optionsObjects.SetActive(false);
-        mainMenuObjects.SetActive(true);
-    }
-
     public void MusicVolume(float volume)
     {
         mainMenuAudioMixer.SetFloat("Volume", volume);
@@ -284,6 +236,54 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("Res", resolution);
         PlayerPrefs.Save();
 	}
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene("Night01S");
+        PlayerPrefs.SetInt("Night", 1);
+    }
+
+    public void Continue()
+	{
+        PlayerPrefs.SetInt("Night", 2);
+
+        switch (PlayerPrefs.GetInt("Night"))
+        {
+            case 2:
+                SceneManager.LoadScene("Night02S");
+                break;
+
+            default:
+                SceneManager.LoadScene("Night02S");
+                break;
+        }
+    }
+
+    public void Options()
+    {
+        isMenu = false;
+
+		foreach (var arrow in buttonPointer.arrows)
+		{
+            arrow.SetActive(false);
+		}
+
+        optionsObjects.SetActive(true);
+        mainMenuObjects.SetActive(false);
+    }
+
+    public void Menu()
+    {
+        isMenu = true;
+
+        foreach (var arrow in buttonPointer.arrows)
+        {
+            arrow.SetActive(false);
+        }
+
+        optionsObjects.SetActive(false);
+        mainMenuObjects.SetActive(true);
+    }
 
     private void SetSettings()
 	{
