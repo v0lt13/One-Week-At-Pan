@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PanAI : MonoBehaviour
 {
     [Header("Variables:")]
-    public static int PanAIlevel; 
+    public static int panAIlevel; 
     public int currentCamera = 0;
     public float timeBetwenMovement;
     public static float minTimeBetwenMovement;
@@ -156,7 +156,10 @@ public class PanAI : MonoBehaviour
             animatronics[4].SetActive(true);
             currentCamera++;
 
-            StartCoroutine(nameof(FlashLightsFast));
+			if (!Main.isJumpscare)
+			{
+                StartCoroutine(nameof(FlashLightsFast));
+			}
 
             AIlevel.PanMovingTime();
             timeBetwenMovement = Random.Range(3, 5);

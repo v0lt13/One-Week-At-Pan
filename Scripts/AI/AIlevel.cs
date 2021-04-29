@@ -4,7 +4,7 @@ public static class AIlevel
 {
     public static void PanMovingTime()
     {
-        switch (PanAI.PanAIlevel)
+        switch (PanAI.panAIlevel)
         {
             case 0:
                 PanAI.minTimeBetwenMovement = 1000000;
@@ -185,6 +185,7 @@ public static class AIlevel
                         break;
                 }
                 break;
+
             case 6:
                 switch (Main.nightHour)
                 {
@@ -718,7 +719,7 @@ public static class AIlevel
 
     public static void MikeyMovingTime()
     {
-        switch (MikeyAI.MikeyAIlevel)
+        switch (MikeyAI.mikeyAIlevel)
         {
             case 0:
                 MikeyAI.minTimeBetwenMovement = 1000000;
@@ -899,6 +900,7 @@ public static class AIlevel
                         break;
                 }
                 break;
+
             case 6:
                 switch (Main.nightHour)
                 {
@@ -1432,7 +1434,7 @@ public static class AIlevel
 
     public static void TravisMovingTime()
 	{
-		switch (TravisAI.TravisAILevel)
+		switch (TravisAI.travisAILevel)
 		{
             case 0:
                 TravisAI.minTimeBetwenMovement = 1000000;
@@ -1544,4 +1546,719 @@ public static class AIlevel
                 break;
         }
 	}
+
+    public static void OwlMovingTime()
+	{
+        switch (OwlAI.owlAILevel)
+        {
+            case 0:
+                OwlAI.minTimeBetwenMovement = 1000000;
+                OwlAI.maxTimeBetwenMovement = 1000000;
+                break;
+
+            case 1:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 20;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+                }
+                break;
+
+            case 2:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 19;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 12;
+                        break;
+                }
+                break;
+
+            case 3:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 18;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+                }
+                break;
+
+            case 4:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 12;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+                }
+                break;
+
+            case 5:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 19;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 12;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+                }
+                break;
+
+            case 6:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 18;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+                }
+                break;
+
+            case 7:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+                }
+                break;
+
+            case 8:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+                }
+                break;
+
+            case 9:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 12;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+                }
+                break;
+
+            case 10:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+                }
+                break;
+
+            case 11:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+                }
+                break;
+
+            case 12:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 12;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+                }
+                break;
+
+            case 13:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 12;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 6;
+                        break;
+                }
+                break;
+
+            case 14:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 1000000;
+                        OwlAI.maxTimeBetwenMovement = 1000000;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 11;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 7;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 3;
+                        OwlAI.maxTimeBetwenMovement = 6;
+                        break;
+                }
+                break;
+
+            case 15:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 15;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 12;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 11;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 9;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 3;
+                        OwlAI.maxTimeBetwenMovement = 5;
+                        break;
+                }
+                break;
+
+            case 16:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 17;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 12;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 6;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 2;
+                        OwlAI.maxTimeBetwenMovement = 5;
+                        break;
+                }
+                break;
+
+            case 17:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 14;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 11;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 12;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 8;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 2;
+                        OwlAI.maxTimeBetwenMovement = 4;
+                        break;
+                }
+                break;
+
+            case 18:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 16;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 11;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 12;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 5;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 3;
+                        OwlAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 1;
+                        OwlAI.maxTimeBetwenMovement = 4;
+                        break;
+                }
+                break;
+
+            case 19:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 13;
+                        OwlAI.maxTimeBetwenMovement = 15;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 10;
+                        OwlAI.maxTimeBetwenMovement = 13;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 7;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 3;
+                        OwlAI.maxTimeBetwenMovement = 5;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 1;
+                        OwlAI.maxTimeBetwenMovement = 3;
+                        break;
+                }
+                break;
+
+            case 20:
+                switch (Main.nightHour)
+                {
+                    case 12:
+                        OwlAI.minTimeBetwenMovement = 11;
+                        OwlAI.maxTimeBetwenMovement = 14;
+                        break;
+
+                    case 1:
+                        OwlAI.minTimeBetwenMovement = 9;
+                        OwlAI.maxTimeBetwenMovement = 11;
+                        break;
+
+                    case 2:
+                        OwlAI.minTimeBetwenMovement = 8;
+                        OwlAI.maxTimeBetwenMovement = 10;
+                        break;
+
+                    case 3:
+                        OwlAI.minTimeBetwenMovement = 4;
+                        OwlAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 4:
+                        OwlAI.minTimeBetwenMovement = 2;
+                        OwlAI.maxTimeBetwenMovement = 4;
+                        break;
+
+                    case 5:
+                        OwlAI.minTimeBetwenMovement = 1;
+                        OwlAI.maxTimeBetwenMovement = 2;
+                        break;
+                }
+                break;
+
+            default:
+                Debug.LogWarning("SomethingWentWrong");
+                break;
+        }
+    }
 }

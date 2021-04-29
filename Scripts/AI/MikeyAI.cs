@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MikeyAI : MonoBehaviour
 {
     [Header("Variables:")]
-    public static int MikeyAIlevel;
+    public static int mikeyAIlevel;
     public int currentCamera = 0;
     public float timeBetwenMovement;
     public static float minTimeBetwenMovement;
@@ -185,7 +185,10 @@ public class MikeyAI : MonoBehaviour
             animatronics[5].SetActive(true);
             currentCamera++;
 
-            StartCoroutine(nameof(FlashLightsFast));
+            if (!Main.isJumpscare)
+            {
+                StartCoroutine(nameof(FlashLightsFast));
+            }
 
             AIlevel.MikeyMovingTime();
             timeBetwenMovement = Random.Range(3, 5);

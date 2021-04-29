@@ -17,6 +17,7 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private Text roomNameText;
     private Main main;
     private Night2 night2;
+    private Night2Controls night2controls;
     private Animator mainAnimator;
     private RawImage staticEffect;
     private Transform mainCameraTransform;
@@ -45,6 +46,7 @@ public class CameraSystem : MonoBehaviour
 		if (Main.night != 1)
 		{
             night2 = gameObject.GetComponent<Night2>();
+            night2controls = gameObject.GetComponent<Night2Controls>();
 		}
     }
 
@@ -71,9 +73,9 @@ public class CameraSystem : MonoBehaviour
                 roomNameText.text = PlayerPrefs.GetString("camName");
             }
 
-            if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1)
+            if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1 && night2controls != null)
             {
-                night2.lightControls.SetActive(true);
+                night2controls.lightControls.SetActive(true);
             }
 
             mainCameraTransform.position = new Vector3(15f, 1f, 11f);
@@ -168,9 +170,9 @@ public class CameraSystem : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1)
+        if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1 && night2controls != null)
         {
-            night2.lightControls.SetActive(false);
+            night2controls.lightControls.SetActive(false);
         }
 
         cameraButtonOn.SetActive(true);

@@ -11,17 +11,18 @@ public class Main : MonoBehaviour
     private bool isPhoneCallMuted = false;
 
     [Header("Components:")]
-    [HideInInspector] public PanAI panAI;
-    [HideInInspector] public MikeyAI mikeyAI;
-    [Space]
     [SerializeField] private Text nightHourText;
     [Space]
     [SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff, MuteCallButton
     private CameraSystem cameraSys;
+    private PanAI panAI;
+    private MikeyAI mikeyAI;
+    private OwlAI owlAI;
 
     [Header ("GameObjects:")]
     [SerializeField] private GameObject callButton;
     [SerializeField] private GameObject framerate;
+    [SerializeField] private GameObject owlObject;
     [Space]
     [SerializeField] private GameObject[] callObjects; // Objetcs: Call, MuteCallButton
     private GameObject mikeyObject;
@@ -32,6 +33,11 @@ public class Main : MonoBehaviour
 		if (PlayerPrefs.GetInt("Night") != 0)
 		{
             night = PlayerPrefs.GetInt("Night");
+		}
+
+		if (night == 4)
+		{
+            night = 3;
 		}
 
 		if (Framerate.showFPS)
@@ -48,9 +54,10 @@ public class Main : MonoBehaviour
 
         SetAIlevel();
 
-        print(PanAI.PanAIlevel);
-        print(MikeyAI.MikeyAIlevel);
-        print(TravisAI.TravisAILevel);
+        print(PanAI.panAIlevel);
+        print(MikeyAI.mikeyAIlevel);
+        print(TravisAI.travisAILevel);
+        print(OwlAI.owlAILevel);
     }
 
     void Start()
@@ -62,8 +69,14 @@ public class Main : MonoBehaviour
         mikeyAI = mikeyObject.GetComponent<MikeyAI>();
         panAI = panObject.GetComponent<PanAI>();
 
+		if (owlObject != null)
+		{
+            owlAI = owlObject.GetComponent<OwlAI>();
+		}
+
         amountOfTime = 360f;
         nightHour = 12;
+        isJumpscare = false;
 
         Invoke(nameof(ActivateCallButton), 7f);
         Invoke(nameof(RemoveCallButton), 30f);
@@ -121,44 +134,49 @@ public class Main : MonoBehaviour
     {
         if (night == 1)
         {
-            PanAI.PanAIlevel = 1;
-            MikeyAI.MikeyAIlevel = 1;
+            PanAI.panAIlevel = 1;
+            MikeyAI.mikeyAIlevel = 1;
         }
         else if (night == 2)
         {
-            PanAI.PanAIlevel = 3;
-            MikeyAI.MikeyAIlevel = 4;
-            TravisAI.TravisAILevel = 6;
+            PanAI.panAIlevel = 3;
+            MikeyAI.mikeyAIlevel = 4;
+            TravisAI.travisAILevel = 6;
         }
         else if (night == 3)
         {
-            PanAI.PanAIlevel = 5;
-            MikeyAI.MikeyAIlevel = 5;
-            TravisAI.TravisAILevel = 8;
+            PanAI.panAIlevel = 5;
+            MikeyAI.mikeyAIlevel = 5;
+            TravisAI.travisAILevel = 8;
+            OwlAI.owlAILevel = 6;
         }
         else if (night == 4)
         {
-            PanAI.PanAIlevel = 9;
-            MikeyAI.MikeyAIlevel = 7;
-            TravisAI.TravisAILevel = 10;
+            PanAI.panAIlevel = 9;
+            MikeyAI.mikeyAIlevel = 7;
+            TravisAI.travisAILevel = 10;
+            OwlAI.owlAILevel = 8;
         }
         else if (night == 5)
         {
-            PanAI.PanAIlevel = 13;
-            MikeyAI.MikeyAIlevel = 15;
-            TravisAI.TravisAILevel = 13;
+            PanAI.panAIlevel = 13;
+            MikeyAI.mikeyAIlevel = 15;
+            TravisAI.travisAILevel = 13;
+            OwlAI.owlAILevel = 10;
         }
         else if (night == 6)
         {
-            PanAI.PanAIlevel = 15;
-            MikeyAI.MikeyAIlevel = 16;
-            TravisAI.TravisAILevel = 15;
+            PanAI.panAIlevel = 15;
+            MikeyAI.mikeyAIlevel = 16;
+            TravisAI.travisAILevel = 15;
+            OwlAI.owlAILevel = 14;
         }
         else if (night == 7)
         {
-            PanAI.PanAIlevel = 17;
-            MikeyAI.MikeyAIlevel = 18;
-            TravisAI.TravisAILevel = 18;
+            PanAI.panAIlevel = 17;
+            MikeyAI.mikeyAIlevel = 18;
+            TravisAI.travisAILevel = 18;
+            OwlAI.owlAILevel = 19;
         }
     }
 
@@ -171,11 +189,17 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
+            AIlevel.OwlMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
                 panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
                 mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+            }
+
+            if (owlAI != null && owlAI.currentCamera != 6)
+            {
+                owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
             }
 
             nightHourText.text = $"{nightHour} AM";
@@ -187,11 +211,17 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
+            AIlevel.OwlMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
                 panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
                 mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+            }
+
+            if (owlAI != null && owlAI.currentCamera != 6)
+            {
+                owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
             }
 
             nightHourText.text = $"{nightHour} AM";
@@ -203,12 +233,18 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
+            AIlevel.OwlMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
                 panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
                 mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
             }
+
+			if (owlAI != null && owlAI.currentCamera != 6)
+			{
+                owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+			}
 
             nightHourText.text = $"{nightHour} AM";
         }
@@ -219,11 +255,17 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
+            AIlevel.OwlMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
                 panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
                 mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+            }
+
+            if (owlAI != null && owlAI.currentCamera != 6)
+            {
+                owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
             }
 
             nightHourText.text = $"{nightHour} AM";
@@ -235,11 +277,17 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
+            AIlevel.OwlMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
                 panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
                 mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+            }
+
+            if (owlAI != null && owlAI.currentCamera != 6)
+            {
+                owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
             }
 
             nightHourText.text = $"{nightHour} AM";

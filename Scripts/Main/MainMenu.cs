@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour
     [Space]
     [SerializeField] private Text controlsText;
     [SerializeField] private Text nightNumberText;
+    [SerializeField] private Text volumeWarningText;
     [Space]
     [SerializeField] private Dropdown resolutionDropdown;
     [Space]
@@ -120,6 +121,15 @@ public class MainMenu : MonoBehaviour
 		else
 		{
             timeUntilDataDeleted = 3f;
+		}
+
+		if (volumeSlider.value < -15)
+		{
+            volumeWarningText.text = "WARNING: this game is sound based! Turning the volume very low will increase the difficulty of the game";
+		}
+		else
+		{
+            volumeWarningText.text = "";
 		}
     }
 
@@ -245,16 +255,18 @@ public class MainMenu : MonoBehaviour
 
     public void Continue()
 	{
-        PlayerPrefs.SetInt("Night", 2);
-
         switch (PlayerPrefs.GetInt("Night"))
         {
             case 2:
                 SceneManager.LoadScene("Night02S");
                 break;
+                
+            case 3:
+                SceneManager.LoadScene("Night03S");
+                break;
 
             default:
-                SceneManager.LoadScene("Night02S");
+                SceneManager.LoadScene("Night03S");
                 break;
         }
     }

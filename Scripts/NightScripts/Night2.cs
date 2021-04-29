@@ -7,7 +7,6 @@ public class Night2 : MonoBehaviour
     [HideInInspector] public bool isOvenOn = true;
     [SerializeField] [Range(1f, 10f)] private float heatChargerDecreaseSpeed;
     [SerializeField] [Range(1f, 10f)] private float heatChargerIncreaseSpeed;
-    private int heKnowsHowUseLights = 0;
     private bool isHoveredOverChargeButton = false;
 
     [Header ("Components:")]
@@ -18,7 +17,6 @@ public class Night2 : MonoBehaviour
     private CameraSystem cameraSys;
 
     [Header ("GameObjects;")]
-    public GameObject lightControls;
     [SerializeField] private GameObject workingOvens;
     [SerializeField] private GameObject ovens;
     [Space]
@@ -39,14 +37,6 @@ public class Night2 : MonoBehaviour
         heatBarImage.color = heatBarGradient.Evaluate(heatSlider.normalizedValue);
 
         EnableCameraLight(cameraSys.cameraNumber - 1);;
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            lightControls.SetActive(false);
-            heKnowsHowUseLights = 1;
-
-            PlayerPrefs.SetInt("heKnowsLights", heKnowsHowUseLights);
-        }
 
         if (heatSlider.value <= 0)
         {

@@ -78,7 +78,11 @@ public class MainCamera : MonoBehaviour
     public void CenterFromLeft()
 	{
         cameraAnimator.SetBool("isLeft", false);
-        cameraSys.cameraButtonOn.SetActive(true);
+
+		if (!OwlAI.owlJumpscare)
+		{
+            cameraSys.cameraButtonOn.SetActive(true);
+		}
     }
 
     public void LookRight()
@@ -90,7 +94,11 @@ public class MainCamera : MonoBehaviour
     public void CenterFromRight()
 	{
         cameraAnimator.SetBool("isRight", false);
-        cameraSys.cameraButtonOn.SetActive(true);
+
+        if (!OwlAI.owlJumpscare)
+        {
+            cameraSys.cameraButtonOn.SetActive(true);
+        }
     }
 
     private void Crouch()
@@ -107,7 +115,11 @@ public class MainCamera : MonoBehaviour
     private void Uncrouch()
 	{
         cameraAnimator.SetBool("isHideing", false);
-        cameraSys.cameraButtonOn.SetActive(true);
+
+        if (!OwlAI.owlJumpscare)
+        {
+            cameraSys.cameraButtonOn.SetActive(true);
+        }
 
         isCrouching = false;
 

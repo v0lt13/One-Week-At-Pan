@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class TravisAI : MonoBehaviour
 {
     [Header("Variables:")]
-    public static int TravisAILevel;
+    public static int travisAILevel;
     public int currentCamera = 0;
     public float timeBetwenMovement;
     public static float minTimeBetwenMovement;
