@@ -265,8 +265,12 @@ public class MainMenu : MonoBehaviour
                 SceneManager.LoadScene("Night03S");
                 break;
 
+            case 4:
+                SceneManager.LoadScene("Night04S");
+                break;
+
             default:
-                SceneManager.LoadScene("Night03S");
+                SceneManager.LoadScene("Night04S");
                 break;
         }
     }

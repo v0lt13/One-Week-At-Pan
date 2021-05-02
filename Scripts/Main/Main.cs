@@ -35,9 +35,9 @@ public class Main : MonoBehaviour
             night = PlayerPrefs.GetInt("Night");
 		}
 
-		if (night == 4)
+		if (night == 5)
 		{
-            night = 3;
+            night = 4;
 		}
 
 		if (Framerate.showFPS)
@@ -89,13 +89,13 @@ public class Main : MonoBehaviour
         NightTime();
 
         // Used to skip the nights, DEBUG ONLY
-        /*if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 SceneManager.LoadScene("6AM");
             }
-        }*/
+        }
 
 		if (PauseMenu.isPaused && !isPhoneCallMuted)
 		{
