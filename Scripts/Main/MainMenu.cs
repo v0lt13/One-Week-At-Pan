@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private int currentTexture;
     private int vsync;
     private int fullscreen;
     private int showFPS;
@@ -14,7 +13,6 @@ public class MainMenu : MonoBehaviour
     private int currentPanTexture;
     private int currentStaticImageTexture;
     private float timeBetwenPanTextures;
-    private float timeBetwenTextures;
     private float timeBetwenStaticImageTextures;
     private float timeUntilDataDeleted = 3f;
     private bool isMenu;
@@ -36,9 +34,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Dropdown resolutionDropdown;
     [Space]
     [SerializeField] private Texture[] panFaceTextures;
-    [SerializeField] private Texture[] staticEffectTextures;
     private RawImage panFace;
-    private RawImage staticEffect;
     private ButtonPointer buttonPointer;
 
     [Header ("GameObjects:")]
@@ -49,7 +45,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] resolutionDropdownObjects;
     [SerializeField] private GameObject[] staticEffectImageObjects;
     private GameObject panFaceObject;
-    private GameObject staticEffectObject;
 
 	void Awake()
 	{
@@ -59,11 +54,9 @@ public class MainMenu : MonoBehaviour
 	void Start()
     {
         panFaceObject = GameObject.Find("PanFace");
-        staticEffectObject = GameObject.Find("Static");
 
         panFace = panFaceObject.GetComponent<RawImage>();
         buttonPointer = gameObject.GetComponent<ButtonPointer>();
-        staticEffect = staticEffectObject.GetComponent<RawImage>();
 
         nightNumberText.text = PlayerPrefs.GetInt("Night").ToString();
         
@@ -79,7 +72,6 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-        StaticEffect();
         StartCoroutine(PanEffect());
 		StartCoroutine(StaticImageEffect());
 
@@ -350,24 +342,6 @@ public class MainMenu : MonoBehaviour
             controlsToogle.isOn = false;
             controlsText.text = "Mouse";
             SwitchControls(false);
-        }
-    }
-
-    private void StaticEffect()
-	{
-        timeBetwenTextures -= Time.deltaTime;
-
-        if (timeBetwenTextures < 0)
-        {
-            timeBetwenTextures = 0;
-        }
-
-        if (timeBetwenTextures == 0)
-        {
-            currentTexture++;
-            currentTexture %= staticEffectTextures.Length;
-            staticEffect.texture = staticEffectTextures[currentTexture];
-            timeBetwenTextures = 0.08f;
         }
     }
 
