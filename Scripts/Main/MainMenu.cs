@@ -61,7 +61,6 @@ public class MainMenu : MonoBehaviour
         nightNumberText.text = PlayerPrefs.GetInt("Night").ToString();
         
 		isMenu = true;
-
         timeBetwenPanTextures = Random.Range(1f, 5f);
 
 		if (PlayerPrefs.GetInt("Night") > 1)
@@ -261,8 +260,16 @@ public class MainMenu : MonoBehaviour
                 SceneManager.LoadScene("Night04S");
                 break;
 
+            case 5:
+                SceneManager.LoadScene("Night05S");
+                break;
+
+            case 6:
+                SceneManager.LoadScene("Night06S");
+                break;
+
             default:
-                SceneManager.LoadScene("Night04S");
+                SceneManager.LoadScene("Night06S");
                 break;
         }
     }

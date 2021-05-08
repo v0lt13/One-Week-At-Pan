@@ -2261,4 +2261,9 @@ public static class AIlevel
                 break;
         }
     }
+
+    public static void EyeballDemonMovingTime()
+	{
+
+	}
 }

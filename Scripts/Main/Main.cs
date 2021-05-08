@@ -30,14 +30,18 @@ public class Main : MonoBehaviour
 
     void Awake()
     {
-		if (PlayerPrefs.GetInt("Night") != 0)
+        amountOfTime = 360f;
+        nightHour = 12;
+        isJumpscare = false;
+
+        if (PlayerPrefs.GetInt("Night") != 0)
 		{
             night = PlayerPrefs.GetInt("Night");
 		}
 
-		if (night == 5)
+		if (night == 7)
 		{
-            night = 4;
+            night = 6;
 		}
 
 		if (Framerate.showFPS)
@@ -69,17 +73,13 @@ public class Main : MonoBehaviour
         mikeyAI = mikeyObject.GetComponent<MikeyAI>();
         panAI = panObject.GetComponent<PanAI>();
 
-		if (owlObject != null)
+        if (owlObject != null)
 		{
             owlAI = owlObject.GetComponent<OwlAI>();
 		}
 
-        amountOfTime = 360f;
-        nightHour = 12;
-        isJumpscare = false;
-
         Invoke(nameof(ActivateCallButton), 7f);
-        Invoke(nameof(RemoveCallButton), 30f);
+        Invoke(nameof(RemoveCallButton), 25f);
     }
 
     void Update()

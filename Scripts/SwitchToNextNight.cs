@@ -10,9 +10,9 @@ public class SwitchToNextNight : MonoBehaviour
 	{
 		Main.night++;
 
-		if (Main.night > 5)
+		if (Main.night > 7)
 		{
-			Main.night = 5;
+			Main.night = 7;
 		}
 
 		PlayerPrefs.SetInt("Night", Main.night);
@@ -38,6 +38,14 @@ public class SwitchToNextNight : MonoBehaviour
 
 			case 4:
 				SceneManager.LoadScene("Night04S");
+				break;
+
+			case 5:
+				SceneManager.LoadScene("Night05S");
+				break;
+
+			case 6:
+				SceneManager.LoadScene("Night06S");
 				break;
 
 			default:
