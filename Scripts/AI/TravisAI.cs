@@ -111,6 +111,7 @@ public class TravisAI : MonoBehaviour
 
             cameraSys.cameraButtonOn.SetActive(false);
             cameraSys.cameraButtonOff.SetActive(false);
+            mainCamera.cameraAnimator.SetBool("isHideing", false);
 
             if (cameraSys.isCameraActive)
             {

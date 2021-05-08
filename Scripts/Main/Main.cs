@@ -33,6 +33,7 @@ public class Main : MonoBehaviour
         amountOfTime = 360f;
         nightHour = 12;
         isJumpscare = false;
+        OwlAI.owlJumpscare = false;
 
         if (PlayerPrefs.GetInt("Night") != 0)
 		{
