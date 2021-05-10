@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
         panFaceObject = GameObject.Find("PanFace");
 
         panFace = panFaceObject.GetComponent<RawImage>();
-        buttonPointer = gameObject.GetComponent<ButtonPointer>();
+        buttonPointer = GetComponent<ButtonPointer>();
 
         nightNumberText.text = PlayerPrefs.GetInt("Night").ToString();
         

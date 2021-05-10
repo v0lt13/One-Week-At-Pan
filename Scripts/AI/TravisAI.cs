@@ -17,7 +17,7 @@ public class TravisAI : MonoBehaviour
     [Space]
     [SerializeField] private AudioClip[] travisAudioClip; // AudioClips: jumpScareSFX, lighFlickerSFX, staticSFX
     private Main main;
-    private Night2 night2;
+    private HeatSystem heatSystem;
     private CameraSystem cameraSys;
     private MainCamera mainCamera;
     private AudioSource travisAudioSource;
@@ -36,7 +36,7 @@ public class TravisAI : MonoBehaviour
     {
         main = mainCanvasObject.GetComponent<Main>();
         cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
-        night2 = mainCanvasObject.GetComponent<Night2>();
+        heatSystem = mainCanvasObject.GetComponent<HeatSystem>();
         mainCamera = mainCameraObject.GetComponent<MainCamera>();
         travisAudioSource = travisObject.GetComponent<AudioSource>();
 
@@ -46,7 +46,7 @@ public class TravisAI : MonoBehaviour
 
     void Update()
     {
-		if (!night2.isOvenOn)
+		if (!heatSystem.isOvenOn)
 		{
             timeBetwenMovement -= Time.deltaTime;
 		}

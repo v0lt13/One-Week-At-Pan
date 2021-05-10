@@ -385,13 +385,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 3;
-                        PanAI.maxTimeBetwenMovement = 5;
+                        PanAI.minTimeBetwenMovement = 5;
+                        PanAI.maxTimeBetwenMovement = 7;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 2;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 7;
                         break;
                 }
                 break;
@@ -420,13 +420,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 2;
-                        PanAI.maxTimeBetwenMovement = 4;
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 7;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 6;
                         break;
                 }
                 break;
@@ -455,13 +455,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 2;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 6;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 6;
                         break;
                 }
                 break;
@@ -490,13 +490,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 2;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 6;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 5;
                         break;
                 }
                 break;
@@ -525,13 +525,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 5;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 2;
+                        PanAI.minTimeBetwenMovement = 2;
+                        PanAI.maxTimeBetwenMovement = 5;
                         break;
                 }
                 break;
@@ -560,13 +560,13 @@ public static class AIlevel
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
+                        PanAI.minTimeBetwenMovement = 2;
+                        PanAI.maxTimeBetwenMovement = 5;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 2;
+                        PanAI.minTimeBetwenMovement = 2;
+                        PanAI.maxTimeBetwenMovement = 4;
                         break;
                 }
                 break;
@@ -581,26 +581,26 @@ public static class AIlevel
 
                     case 1:
                         PanAI.minTimeBetwenMovement = 6;
-                        PanAI.maxTimeBetwenMovement = 8;
+                        PanAI.maxTimeBetwenMovement = 10;
                         break;
 
                     case 2:
-                        PanAI.minTimeBetwenMovement = 3;
-                        PanAI.maxTimeBetwenMovement = 6;
+                        PanAI.minTimeBetwenMovement = 6;
+                        PanAI.maxTimeBetwenMovement = 9;
                         break;
 
                     case 3:
-                        PanAI.minTimeBetwenMovement = 3;
-                        PanAI.maxTimeBetwenMovement = 4;
+                        PanAI.minTimeBetwenMovement = 5;
+                        PanAI.maxTimeBetwenMovement = 7;
                         break;
 
                     case 4:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 2;
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 6;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 0;
+                        PanAI.minTimeBetwenMovement = 4;
                         PanAI.maxTimeBetwenMovement = 2;
                         break;
                 }
@@ -620,23 +620,23 @@ public static class AIlevel
                         break;
 
                     case 2:
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 3:
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 4:
                         PanAI.minTimeBetwenMovement = 3;
                         PanAI.maxTimeBetwenMovement = 5;
                         break;
 
-                    case 3:
-                        PanAI.minTimeBetwenMovement = 2;
-                        PanAI.maxTimeBetwenMovement = 4;
-                        break;
-
-                    case 4:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 2;
-                        break;
-
                     case 5:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 2;
+                        PanAI.minTimeBetwenMovement = 2;
+                        PanAI.maxTimeBetwenMovement = 5;
                         break;
                 }
                 break;
@@ -655,23 +655,23 @@ public static class AIlevel
                         break;
 
                     case 2:
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 3:
+                        PanAI.minTimeBetwenMovement = 3;
+                        PanAI.maxTimeBetwenMovement = 5;
+                        break;
+
+                    case 4:
                         PanAI.minTimeBetwenMovement = 2;
                         PanAI.maxTimeBetwenMovement = 4;
                         break;
 
-                    case 3:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 4;
-                        break;
-
-                    case 4:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 2;
-                        break;
-
                     case 5:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 1;
+                        PanAI.minTimeBetwenMovement = 1;
+                        PanAI.maxTimeBetwenMovement = 3;
                         break;
                 }
                 break;
@@ -685,28 +685,28 @@ public static class AIlevel
                         break;
 
                     case 1:
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 7;
+                        break;
+
+                    case 2:
+                        PanAI.minTimeBetwenMovement = 4;
+                        PanAI.maxTimeBetwenMovement = 6;
+                        break;
+
+                    case 3:
                         PanAI.minTimeBetwenMovement = 3;
                         PanAI.maxTimeBetwenMovement = 5;
                         break;
 
-                    case 2:
-                        PanAI.minTimeBetwenMovement = 1;
-                        PanAI.maxTimeBetwenMovement = 3;
-                        break;
-
-                    case 3:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 3;
-                        break;
-
                     case 4:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 2;
+                        PanAI.minTimeBetwenMovement = 2;
+                        PanAI.maxTimeBetwenMovement = 4;
                         break;
 
                     case 5:
-                        PanAI.minTimeBetwenMovement = 0;
-                        PanAI.maxTimeBetwenMovement = 1;
+                        PanAI.minTimeBetwenMovement = 1;
+                        PanAI.maxTimeBetwenMovement = 3;
                         break;
                 }
                 break;

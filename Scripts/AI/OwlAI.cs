@@ -17,7 +17,7 @@ public class OwlAI : MonoBehaviour
     [Space]
     [SerializeField] private AudioClip[] owlAudioClip; // AudioClips: staticSFX, ventFootstepSFX
     private Main main;
-    private Night2 night2;
+    private HeatSystem heatSystem;
     private CameraSystem cameraSys;
     private MainCamera mainCamera;
     private AudioSource owlAudioSource;
@@ -34,7 +34,7 @@ public class OwlAI : MonoBehaviour
     {
         main = mainCanvasObject.GetComponent<Main>();
         cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
-        night2 = mainCanvasObject.GetComponent<Night2>();
+        heatSystem = mainCanvasObject.GetComponent<HeatSystem>();
         mainCamera = mainCameraObject.GetComponent<MainCamera>();
         owlAudioSource = owlObject.GetComponent<AudioSource>();
 

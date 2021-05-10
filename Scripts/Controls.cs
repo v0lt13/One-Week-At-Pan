@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Night1 : MonoBehaviour
+public class Controls : MonoBehaviour
 {
     private int heKnowsHowToPlayKeyboard = 0;
     private int heKnowsHowToPlayMouse = 0;

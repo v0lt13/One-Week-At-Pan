@@ -70,7 +70,7 @@ public class Main : MonoBehaviour
         mikeyObject = GameObject.Find("Mikey");
         panObject = GameObject.Find("Pan");
 
-        cameraSys = gameObject.GetComponent<CameraSystem>();
+        cameraSys = GetComponent<CameraSystem>();
         mikeyAI = mikeyObject.GetComponent<MikeyAI>();
         panAI = panObject.GetComponent<PanAI>();
 
@@ -80,7 +80,7 @@ public class Main : MonoBehaviour
 		}
 
         Invoke(nameof(ActivateCallButton), 7f);
-        Invoke(nameof(RemoveCallButton), 25f);
+        Invoke(nameof(RemoveCallButton), 20f);
     }
 
     void Update()

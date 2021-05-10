@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Night2 : MonoBehaviour
+public class HeatSystem : MonoBehaviour
 {
     [Header ("Variables:")]
     [HideInInspector] public bool isOvenOn = true;
@@ -26,7 +26,7 @@ public class Night2 : MonoBehaviour
 
 	void Start()
 	{
-        cameraSys = gameObject.GetComponent<CameraSystem>();
+        cameraSys = GetComponent<CameraSystem>();
 	}
 
 	void Update()

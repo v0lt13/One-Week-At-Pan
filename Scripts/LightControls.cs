@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Night2Controls : MonoBehaviour
+public class LightControls : MonoBehaviour
 {
     private int heKnowsHowUseLights = 0;
 
