@@ -7,7 +7,7 @@ public class Main : MonoBehaviour
     public static bool isJumpscare = false;
     public static int night = 1;
     public static int nightHour = 12;
-    private float amountOfTime;
+    [SerializeField] private float amountOfTime;
     private bool isPhoneCallMuted = false;
 
     [Header("Components:")]
@@ -18,11 +18,13 @@ public class Main : MonoBehaviour
     private PanAI panAI;
     private MikeyAI mikeyAI;
     private OwlAI owlAI;
+    private EyeDemonAI eyeDemonAI;
 
     [Header ("GameObjects:")]
     [SerializeField] private GameObject callButton;
     [SerializeField] private GameObject framerate;
     [SerializeField] private GameObject owlObject;
+    [SerializeField] private GameObject eyeDemonObject;
     [Space]
     [SerializeField] private GameObject[] callObjects; // Objetcs: Call, MuteCallButton
     private GameObject mikeyObject;
@@ -40,9 +42,9 @@ public class Main : MonoBehaviour
             night = PlayerPrefs.GetInt("Night");
 		}
 
-		if (night == 7)
+		if (night == 8)
 		{
-            night = 6;
+            night = 7;
 		}
 
 		if (Framerate.showFPS)
@@ -59,10 +61,12 @@ public class Main : MonoBehaviour
 
         SetAIlevel();
 
+        // For debug
         print(PanAI.panAIlevel);
         print(MikeyAI.mikeyAIlevel);
         print(TravisAI.travisAILevel);
         print(OwlAI.owlAILevel);
+        print(night);
     }
 
     void Start()
@@ -78,6 +82,11 @@ public class Main : MonoBehaviour
 		{
             owlAI = owlObject.GetComponent<OwlAI>();
 		}
+
+        if (eyeDemonObject != null)
+        {
+            eyeDemonAI = eyeDemonObject.GetComponent<EyeDemonAI>();
+        }
 
         Invoke(nameof(ActivateCallButton), 7f);
         Invoke(nameof(RemoveCallButton), 20f);
@@ -235,6 +244,7 @@ public class Main : MonoBehaviour
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
             AIlevel.OwlMovingTime();
+            AIlevel.EyeDemonMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
@@ -247,6 +257,12 @@ public class Main : MonoBehaviour
                 owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
 			}
 
+			if (eyeDemonObject != null && !isJumpscare)
+			{
+                eyeDemonObject.SetActive(true);
+                eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
+            }
+
             nightHourText.text = $"{nightHour} AM";
         }
         else if (Mathf.Floor(amountOfTime) == 120f)
@@ -256,7 +272,8 @@ public class Main : MonoBehaviour
 
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
-            AIlevel.OwlMovingTime();
+			AIlevel.OwlMovingTime();
+            AIlevel.EyeDemonMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
@@ -267,6 +284,11 @@ public class Main : MonoBehaviour
             if (owlAI != null && owlAI.currentCamera != 6)
             {
                 owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+            }
+
+            if (eyeDemonObject != null && eyeDemonAI.currentCamera != 6 && eyeDemonAI.currentCamera != 4 )
+            {
+                eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
             }
 
             nightHourText.text = $"{nightHour} AM";
@@ -279,6 +301,7 @@ public class Main : MonoBehaviour
             AIlevel.PanMovingTime();
             AIlevel.MikeyMovingTime();
             AIlevel.OwlMovingTime();
+            AIlevel.EyeDemonMovingTime();
 
             if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
             {
@@ -291,12 +314,24 @@ public class Main : MonoBehaviour
                 owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
             }
 
+            if (eyeDemonObject != null && eyeDemonAI.currentCamera != 6 && eyeDemonAI.currentCamera != 4)
+            {
+                eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
+            }
+
             nightHourText.text = $"{nightHour} AM";
         }
         else if (Mathf.Floor(amountOfTime) == 0f)
         {
             amountOfTime = 0f;
             nightHour = 6;
+
+			if (night == 7 && MainMenu.starNumber == 0)
+			{
+                MainMenu.starNumber = 1;
+                PlayerPrefs.SetInt("stars", MainMenu.starNumber);
+                PlayerPrefs.Save();
+			}
 
             nightHourText.text = $"{nightHour} AM";
             SceneManager.LoadSceneAsync("6AM");

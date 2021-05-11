@@ -2262,8 +2262,39 @@ public static class AIlevel
         }
     }
 
-    public static void EyeballDemonMovingTime()
+    public static void EyeDemonMovingTime()
 	{
+        switch (Main.nightHour)
+        {
+            case 12:
+                EyeDemonAI.minTimeBetwenMovement = 1000000;
+                EyeDemonAI.maxTimeBetwenMovement = 1000000;
+                break;
 
-	}
+            case 1:
+                EyeDemonAI.minTimeBetwenMovement = 1000000;
+                EyeDemonAI.maxTimeBetwenMovement = 1000000;
+                break;
+
+            case 2:
+                EyeDemonAI.minTimeBetwenMovement = 1000000;
+                EyeDemonAI.maxTimeBetwenMovement = 1000000;
+                break;
+
+            case 3:
+                EyeDemonAI.minTimeBetwenMovement = 3;
+                EyeDemonAI.maxTimeBetwenMovement = 5;
+                break;
+
+            case 4:
+                EyeDemonAI.minTimeBetwenMovement = 2;
+                EyeDemonAI.maxTimeBetwenMovement = 4;
+                break;
+
+            case 5:
+                EyeDemonAI.minTimeBetwenMovement = 1;
+                EyeDemonAI.maxTimeBetwenMovement = 3;
+                break;
+        }
+    }
 }

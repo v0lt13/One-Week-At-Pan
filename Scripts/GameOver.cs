@@ -31,6 +31,11 @@ public class GameOver : MonoBehaviour
             tips.Add("Make sure the ovens stay on else Travis will come after you");
 		}
 
+		if (Main.night == 7)
+		{
+            tips.Clear();
+		}
+
         tipNumber = Random.Range(0, tips.Count);
         tipText.text = $"TIP: {tips[tipNumber]}";
 	}

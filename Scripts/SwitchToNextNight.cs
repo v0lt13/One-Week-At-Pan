@@ -3,16 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class SwitchToNextNight : MonoBehaviour
 {
-    [Header("Variables:")]
     [SerializeField] private float sceneSwitchTime;
 
 	void Awake()
 	{
 		Main.night++;
 
-		if (Main.night > 7)
+		if (Main.night >= 8)
 		{
-			Main.night = 7;
+			Main.night = 8;
 		}
 
 		PlayerPrefs.SetInt("Night", Main.night);
@@ -48,8 +47,12 @@ public class SwitchToNextNight : MonoBehaviour
 				SceneManager.LoadScene("Night06S");
 				break;
 
+			case 7:
+				SceneManager.LoadScene("Night07S");
+				break;
+
 			default:
-				SceneManager.LoadScene("ComingSoonScreen");
+				SceneManager.LoadScene("Ending");
 				break;
 		}
 	}

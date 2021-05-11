@@ -3,10 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MikeyAI : MonoBehaviour
+public class EyeDemonAI : MonoBehaviour
 {
     [Header("Variables:")]
-    public static int mikeyAIlevel;
     public int currentCamera = 0;
     public float timeBetwenMovement;
     public static float minTimeBetwenMovement;
@@ -15,15 +14,15 @@ public class MikeyAI : MonoBehaviour
     [Header("Components:")]
     [SerializeField] private RawImage cameraStatic;
     [Space]
-    [SerializeField] private AudioClip[] mikeyAudioClip; // AudioClips: footstep, jumpScareSFX, lighFlickerSFX, staticSFX
+    [SerializeField] private AudioClip[] eyeDemonAudioClip; // AudioClips: jumpScareSFX, lighFlickerSFX, staticSFX
     private Main main;
     private CameraSystem cameraSys;
     private TravisAI travisAI;
     private MainCamera mainCamera;
-    private AudioSource mikeyAudioSource;
+    private AudioSource eyeDemonAudioSource;
 
-    [Header ("GameObjects:")]
-    [SerializeField] private GameObject mikeyObject;
+    [Header("GameObjects:")]
+    [SerializeField] private GameObject eyeDemonObject;
     [SerializeField] private GameObject mainCameraObject;
     [SerializeField] private GameObject mainCanvasObject;
     [SerializeField] private GameObject[] animatronics;
@@ -31,18 +30,30 @@ public class MikeyAI : MonoBehaviour
     [SerializeField] private GameObject[] roomLights;
     [SerializeField] private GameObject[] roomObjects;
     private GameObject travisObject;
+    private GameObject panObject;
+    private GameObject mikeyObject;
+    private GameObject owlObject;
 
     void Start()
     {
         travisObject = GameObject.Find("Travis");
+        panObject = GameObject.Find("Pan");
+        mikeyObject = GameObject.Find("Mikey");
+        owlObject = GameObject.Find("Owl");
 
         main = mainCanvasObject.GetComponent<Main>();
-        cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
         travisAI = travisObject.GetComponent<TravisAI>();
+        eyeDemonAudioSource = eyeDemonObject.GetComponent<AudioSource>();
         mainCamera = mainCameraObject.GetComponent<MainCamera>();
-        mikeyAudioSource = mikeyObject.GetComponent<AudioSource>();
+        cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
 
-        AIlevel.MikeyMovingTime();
+        panObject.SetActive(false);
+        mikeyObject.SetActive(false);
+        owlObject.SetActive(false);
+
+        StartCoroutine(FlashLightsFastWithSound());
+
+        AIlevel.EyeDemonMovingTime();
         timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
     }
 
@@ -65,17 +76,17 @@ public class MikeyAI : MonoBehaviour
             timeBetwenMovement = 10000;
         }
 
-        // Stage phaze01 >> Stage phaze02
+        // Bathroom phaze 0 >> Bathroom phaze 1
         if (timeBetwenMovement <= 0 && currentCamera == 0)
         {
-            if (cameraSys.cameraNumber == 10)
+            if (cameraSys.cameraNumber == 8)
             {
                 cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
                 if (cameraSys.isCameraActive)
                 {
-                    mikeyAudioSource.clip = mikeyAudioClip[3];
-                    mikeyAudioSource.Play();
+                    eyeDemonAudioSource.clip = eyeDemonAudioClip[2];
+                    eyeDemonAudioSource.Play();
                 }
             }
 
@@ -83,92 +94,98 @@ public class MikeyAI : MonoBehaviour
             animatronics[1].SetActive(true);
             currentCamera++;
 
-            AIlevel.MikeyMovingTime();
+            AIlevel.EyeDemonMovingTime();
             timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }
 
-        // Stage phaze02 >> Hallway03
+        // Bathroom phaze 1 >> Hallway03 phaze01
         if (timeBetwenMovement <= 0 && currentCamera == 1)
         {
-            if (cameraSys.cameraNumber == 10 || cameraSys.cameraNumber == 3)
+            if (cameraSys.cameraNumber == 8 || cameraSys.cameraNumber == 3)
             {
+                cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
                 if (cameraSys.isCameraActive)
                 {
-                    mikeyAudioSource.clip = mikeyAudioClip[3];
-                    mikeyAudioSource.Play();
+                    eyeDemonAudioSource.clip = eyeDemonAudioClip[2];
+                    eyeDemonAudioSource.Play();
                 }
-                cameraStatic.CrossFadeAlpha(100, 0.1f, false);
             }
 
             animatronics[1].SetActive(false);
             animatronics[2].SetActive(true);
             currentCamera++;
 
-            AIlevel.MikeyMovingTime();
+            AIlevel.EyeDemonMovingTime();
             timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }
 
-        // Hallway03 >> StorageRoom || Hallway01
+        // Hallway03 phaze01 >> Hallway03 phaze02
         if (timeBetwenMovement <= 0 && currentCamera == 2)
         {
-            if (cameraSys.cameraNumber == 3 || cameraSys.cameraNumber == 5 || cameraSys.cameraNumber == 1)
+            if (cameraSys.cameraNumber == 3)
             {
                 cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
                 if (cameraSys.isCameraActive)
                 {
-                    mikeyAudioSource.clip = mikeyAudioClip[3];
-                    mikeyAudioSource.Play();
+                    eyeDemonAudioSource.clip = eyeDemonAudioClip[2];
+                    eyeDemonAudioSource.Play();
                 }
             }
 
-            currentCamera = Random.Range(3, 6);
-
             animatronics[2].SetActive(false);
+            animatronics[3].SetActive(true);
+            currentCamera++;
 
-			if (currentCamera == 3)
-			{
-                animatronics[3].SetActive(true);
-			}
-			else if (currentCamera >= 4)
-			{
-                currentCamera = 4;
-                animatronics[4].SetActive(true);
-            }
-
-            AIlevel.MikeyMovingTime();
+            AIlevel.EyeDemonMovingTime();
             timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }
 
-        // StorageRoom >> Hallway03
+        // Hallway03 phaze02 >> Hallway02 door || Hallway01
         if (timeBetwenMovement <= 0 && currentCamera == 3)
         {
-            if (cameraSys.cameraNumber == 3 || cameraSys.cameraNumber == 5)
+            if (cameraSys.cameraNumber == 3 || cameraSys.cameraNumber == 2 || cameraSys.cameraNumber == 1)
             {
                 cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
                 if (cameraSys.isCameraActive)
                 {
-                    mikeyAudioSource.clip = mikeyAudioClip[3];
-                    mikeyAudioSource.Play();
+                    eyeDemonAudioSource.clip = eyeDemonAudioClip[2];
+                    eyeDemonAudioSource.Play();
                 }
             }
 
-            animatronics[3].SetActive(false);
-            animatronics[2].SetActive(true);
-            currentCamera = 2;
+            currentCamera = Random.Range(4, 5);
 
-            AIlevel.MikeyMovingTime();
-            timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+            animatronics[3].SetActive(false);
+
+            if (currentCamera == 4)
+            {
+                animatronics[4].SetActive(true);
+                timeBetwenMovement = Random.Range(3, 5);
+
+                if (!Main.isJumpscare)
+                {
+                    StartCoroutine(nameof(FlashLightsFast));
+                }
+            }
+            else if (currentCamera == 5)
+            {
+                animatronics[5].SetActive(true);
+
+                AIlevel.EyeDemonMovingTime();
+                timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+            }
+
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }
 
         // Hallway01 >> Hallway01 door
-        if (timeBetwenMovement <= 0 && currentCamera == 4)
+        if (timeBetwenMovement <= 0 && currentCamera == 5)
         {
             if (cameraSys.cameraNumber == 1)
             {
@@ -176,58 +193,52 @@ public class MikeyAI : MonoBehaviour
 
                 if (cameraSys.isCameraActive)
                 {
-                    mikeyAudioSource.clip = mikeyAudioClip[3];
-                    mikeyAudioSource.Play();
+                    eyeDemonAudioSource.clip = eyeDemonAudioClip[2];
+                    eyeDemonAudioSource.Play();
                 }
             }
 
-            animatronics[4].SetActive(false);
-            animatronics[5].SetActive(true);
+            animatronics[5].SetActive(false);
+            animatronics[6].SetActive(true);
             currentCamera++;
-
-            if (!Main.isJumpscare)
-            {
-                StartCoroutine(nameof(FlashLightsFast));
-            }
 
             timeBetwenMovement = Random.Range(3, 5);
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }
 
-        // Hallway01 door >> Stage phaze02 || Hallway03
-        if (timeBetwenMovement <= 0 && mainCamera.crouchTime <= 0 && currentCamera == 5 && mainCamera.isCrouching)
+        // Hallway02 door || Hallway01 door >> Bathroom phaze 1 || Hallway03 phaze01
+        if (timeBetwenMovement <= 0 && mainCamera.crouchTime <= 0 && mainCamera.isCrouching && (currentCamera == 4 || currentCamera == 6))
         {
-            animatronics[5].SetActive(false);
-            currentCamera = Random.Range(1, 2);
+            animatronics[6].SetActive(false);
+            animatronics[4].SetActive(false);
+            currentCamera = Random.Range(1, 3);
 
             if (currentCamera == 1)
             {
                 animatronics[1].SetActive(true);
             }
-            else if (currentCamera == 2)
+            else if (currentCamera >= 2)
             {
+                currentCamera = 2;
                 animatronics[2].SetActive(true);
             }
 
-            mikeyAudioSource.clip = mikeyAudioClip[0];
-            mikeyAudioSource.Play();
-
-            AIlevel.MikeyMovingTime();
+            AIlevel.EyeDemonMovingTime();
             timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
         }
 
-        // Hallway01 door >> Office
-        if (timeBetwenMovement <= 0 && currentCamera == 5 && !mainCamera.isCrouching && !Main.isJumpscare)
-        {         
+        // Hallway02 door|| Hallway01 door >> Office
+        if (timeBetwenMovement <= 0 && !mainCamera.isCrouching && !Main.isJumpscare && (currentCamera == 4 || currentCamera == 6))
+        {
             cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
             cameraSys.cameraButtonOn.SetActive(false);
             cameraSys.cameraButtonOff.SetActive(false);
 
             if (cameraSys.isCameraActive)
-			{
+            {
                 cameraSys.DeactivateCamSys();
-			}
+            }
 
             Main.isJumpscare = true;
 
@@ -250,9 +261,9 @@ public class MikeyAI : MonoBehaviour
     }
 
     private void JumpScare()
-	{
-        mikeyAudioSource.clip = mikeyAudioClip[1];
-        mikeyAudioSource.Play();
+    {
+        eyeDemonAudioSource.clip = eyeDemonAudioClip[0];
+        eyeDemonAudioSource.Play();
 
         mainCamera.cameraAnimator.SetBool("isLeft", false);
         mainCamera.cameraAnimator.SetBool("isRight", false);
@@ -264,55 +275,73 @@ public class MikeyAI : MonoBehaviour
 
         roomLights[1].SetActive(true);
 
-        animatronics[5].SetActive(false);
-        animatronics[6].SetActive(true);
+        animatronics[6].SetActive(false);
+        animatronics[7].SetActive(true);
 
         Invoke(nameof(Die), 2f);
     }
 
     private IEnumerator FlashLights()
-	{
-        foreach (var lights in roomLights)
-		{
-            lights.SetActive(false);
-		}
+    {
+        foreach (var light in roomLights)
+        {
+            light.SetActive(false);
+        }
 
-        mikeyAudioSource.clip = mikeyAudioClip[2];
-        mikeyAudioSource.Play();
+        eyeDemonAudioSource.clip = eyeDemonAudioClip[1];
+        eyeDemonAudioSource.Play();
 
         yield return new WaitForSeconds(0.05f);
 
-        foreach (var lights in roomLights)
+        foreach (var light in roomLights)
         {
-            lights.SetActive(true);
+            light.SetActive(true);
         }
 
-        mikeyAudioSource.clip = mikeyAudioClip[2];
-        mikeyAudioSource.Play();
+        eyeDemonAudioSource.clip = eyeDemonAudioClip[1];
+        eyeDemonAudioSource.Play();
 
         yield return new WaitForSeconds(0.1f);
 
-        foreach (var lights in roomLights)
+        foreach (var light in roomLights)
         {
-            lights.SetActive(false);
+            light.SetActive(false);
         }
 
-        mikeyAudioSource.clip = mikeyAudioClip[2];
-        mikeyAudioSource.Play();
+        eyeDemonAudioSource.clip = eyeDemonAudioClip[1];
+        eyeDemonAudioSource.Play();
     }
 
     private IEnumerator FlashLightsFast()
     {
-        foreach (var lights in roomLights)
+        foreach (var light in roomLights)
         {
-            lights.SetActive(false);
+            light.SetActive(false);
         }
 
         yield return new WaitForSeconds(0.05f);
 
-        foreach (var lights in roomLights)
+        foreach (var light in roomLights)
         {
-            lights.SetActive(true);
+            light.SetActive(true);
+        }
+    }
+
+    private IEnumerator FlashLightsFastWithSound()
+    {
+        foreach (var light in roomLights)
+        {
+            light.SetActive(false);
+        }
+
+        eyeDemonAudioSource.clip = eyeDemonAudioClip[1];
+        eyeDemonAudioSource.Play();
+
+        yield return new WaitForSeconds(0.05f);
+
+        foreach (var light in roomLights)
+        {
+            light.SetActive(true);
         }
     }
 }

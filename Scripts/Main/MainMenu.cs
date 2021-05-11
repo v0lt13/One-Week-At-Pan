@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public static int starNumber = 0;
     private int vsync;
     private int fullscreen;
     private int showFPS;
@@ -39,11 +40,14 @@ public class MainMenu : MonoBehaviour
 
     [Header ("GameObjects:")]
     [SerializeField] private GameObject continueButtonObject;
+    [SerializeField] private GameObject extrasButtonObject;
+    [SerializeField] private GameObject customNightButtonObject;
     [SerializeField] private GameObject optionsObjects;
     [SerializeField] private GameObject mainMenuObjects;
     [Space]
     [SerializeField] private GameObject[] resolutionDropdownObjects;
     [SerializeField] private GameObject[] staticEffectImageObjects;
+    [SerializeField] private GameObject[] stars;
     private GameObject panFaceObject;
 
 	void Awake()
@@ -58,7 +62,7 @@ public class MainMenu : MonoBehaviour
         panFace = panFaceObject.GetComponent<RawImage>();
         buttonPointer = GetComponent<ButtonPointer>();
 
-        nightNumberText.text = PlayerPrefs.GetInt("Night").ToString();
+        nightNumberText.text = PlayerPrefs.GetInt("Night") <= 7 ? PlayerPrefs.GetInt("Night").ToString() : nightNumberText.text = "7";
         
 		isMenu = true;
         timeBetwenPanTextures = Random.Range(1f, 5f);
@@ -67,6 +71,28 @@ public class MainMenu : MonoBehaviour
 		{
             continueButtonObject.SetActive(true);
 		}
+
+		if (PlayerPrefs.GetInt("Night") > 7)
+		{
+            extrasButtonObject.SetActive(true);
+            customNightButtonObject.SetActive(true);
+		}
+
+		if (PlayerPrefs.GetInt("stars") == 1)
+		{
+            stars[0].SetActive(true);
+		}
+		else if (PlayerPrefs.GetInt("stars") == 2)
+		{
+            stars[0].SetActive(true);
+            stars[1].SetActive(true);
+        }
+		else if (PlayerPrefs.GetInt("stars") == 3)
+		{
+            stars[0].SetActive(true);
+            stars[1].SetActive(true);
+            stars[2].SetActive(true);
+        }
     }
 
     void Update()
@@ -268,8 +294,12 @@ public class MainMenu : MonoBehaviour
                 SceneManager.LoadScene("Night06S");
                 break;
 
+            case 7:
+                SceneManager.LoadScene("Night07S");
+                break;
+
             default:
-                SceneManager.LoadScene("Night06S");
+                SceneManager.LoadScene("Night07S");
                 break;
         }
     }

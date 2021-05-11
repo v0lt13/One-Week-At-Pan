@@ -161,7 +161,6 @@ public class PanAI : MonoBehaviour
                 StartCoroutine(nameof(FlashLightsFast));
 			}
 
-            AIlevel.PanMovingTime();
             timeBetwenMovement = Random.Range(3, 5);
             Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
         }

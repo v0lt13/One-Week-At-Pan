@@ -222,7 +222,6 @@ public class OwlAI : MonoBehaviour
             animatronics[6].SetActive(true);
             currentCamera++;
 
-            AIlevel.OwlMovingTime();
             timeBetwenMovement = Random.Range(3, 5);
 
             StartCoroutine(FlashLightsFast());
