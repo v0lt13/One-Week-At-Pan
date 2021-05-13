@@ -1,131 +1,136 @@
 using UnityEngine;
+using OneWeekAtPan.AI;
+using OneWeekAtPan.Systems;
 
-public class MainCamera : MonoBehaviour
+namespace OneWeekAtPan.Core
 {
-    [Header ("Variables:")]
-    public float crouchTime;
-    public bool isCrouching = false;
-    public static bool isMouseControls;
+	public class MainCamera : MonoBehaviour
+	{
+		[Header("Variables:")]
+		public float crouchTime;
+		public bool isCrouching = false;
+		public static bool isMouseControls;
 
-    [Header("Components:")]
-    [HideInInspector] public Animator cameraAnimator;
-    [SerializeField] private AudioClip[] cameraAudioClip;
-    private CameraSystem cameraSys;
-    private AudioSource cameraAudioSource;
+		[Header("Components:")]
+		[HideInInspector] public Animator cameraAnimator;
+		[SerializeField] private AudioClip[] cameraAudioClip;
+		private CameraSystem cameraSys;
+		private AudioSource cameraAudioSource;
 
-    [Header ("GameObjects:")]
-    [SerializeField] private GameObject playerCamera;
-    [SerializeField] private GameObject cameraSystem;
+		[Header("GameObjects:")]
+		[SerializeField] private GameObject playerCamera;
+		[SerializeField] private GameObject cameraSystem;
 
-    void Start()
-    {
-        cameraAudioSource = playerCamera.GetComponent<AudioSource>();
-        cameraSys = cameraSystem.GetComponent<CameraSystem>();
-        cameraAnimator = playerCamera.GetComponent<Animator>();
-
-        crouchTime = Random.Range(3, 5);
-    }
-
-    void Update()
-    {
-		if (crouchTime < 0)
+		void Start()
 		{
-            crouchTime = 0;
+			cameraAudioSource = playerCamera.GetComponent<AudioSource>();
+			cameraSys = cameraSystem.GetComponent<CameraSystem>();
+			cameraAnimator = playerCamera.GetComponent<Animator>();
+
+			crouchTime = Random.Range(3, 5);
 		}
 
-		if (isCrouching)
+		void Update()
 		{
-            crouchTime -= Time.deltaTime;
+			if (crouchTime < 0)
+			{
+				crouchTime = 0;
+			}
+
+			if (isCrouching)
+			{
+				crouchTime -= Time.deltaTime;
+			}
+
+			if (Input.GetKeyDown(KeyCode.A) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			{
+				LookLeft();
+			}
+
+			if (Input.GetKeyDown(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			{
+				LookRight();
+			}
+
+			if (Input.GetKeyUp(KeyCode.A) && cameraSys.isCameraActive == false && cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			{
+				CenterFromLeft();
+			}
+
+			if (Input.GetKeyUp(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			{
+				CenterFromRight();
+			}
+
+			if (Input.GetKey(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused)
+			{
+				Crouch();
+			}
+
+			if (Input.GetKeyUp(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !Main.isJumpscare && !PauseMenu.isPaused)
+			{
+				Uncrouch();
+			}
 		}
 
-        if (Input.GetKeyDown(KeyCode.A) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
-        {
-            LookLeft();
-        }
-
-        if (Input.GetKeyDown(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
-        {
-            LookRight();
-        }
-
-        if (Input.GetKeyUp(KeyCode.A) && cameraSys.isCameraActive == false && cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
-        {
-            CenterFromLeft();
-        }
-
-        if (Input.GetKeyUp(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
-        {
-            CenterFromRight();
-        }
-
-        if (Input.GetKey(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused)
-        {
-            Crouch();
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !Main.isJumpscare && !PauseMenu.isPaused)
-        {
-            Uncrouch();
-        }
-    }
-
-    public void LookLeft()
-	{
-        cameraAnimator.SetBool("isLeft", true);
-        cameraSys.cameraButtonOn.SetActive(false);
-    }
-
-    public void CenterFromLeft()
-	{
-        cameraAnimator.SetBool("isLeft", false);
-
-		if (!OwlAI.owlJumpscare)
+		public void LookLeft()
 		{
-            cameraSys.cameraButtonOn.SetActive(true);
+			cameraAnimator.SetBool("isLeft", true);
+			cameraSys.cameraButtonOn.SetActive(false);
 		}
-    }
 
-    public void LookRight()
-    {
-        cameraAnimator.SetBool("isRight", true);
-        cameraSys.cameraButtonOn.SetActive(false);
-    }
+		public void CenterFromLeft()
+		{
+			cameraAnimator.SetBool("isLeft", false);
 
-    public void CenterFromRight()
-	{
-        cameraAnimator.SetBool("isRight", false);
+			if (!OwlAI.owlJumpscare)
+			{
+				cameraSys.cameraButtonOn.SetActive(true);
+			}
+		}
 
-        if (!OwlAI.owlJumpscare)
-        {
-            cameraSys.cameraButtonOn.SetActive(true);
-        }
-    }
+		public void LookRight()
+		{
+			cameraAnimator.SetBool("isRight", true);
+			cameraSys.cameraButtonOn.SetActive(false);
+		}
 
-    private void Crouch()
-	{
-        cameraAnimator.SetBool("isHideing", true);
-        cameraSys.cameraButtonOn.SetActive(false);
+		public void CenterFromRight()
+		{
+			cameraAnimator.SetBool("isRight", false);
 
-        isCrouching = true;
+			if (!OwlAI.owlJumpscare)
+			{
+				cameraSys.cameraButtonOn.SetActive(true);
+			}
+		}
 
-        cameraAudioSource.clip = cameraAudioClip[0];
-        cameraAudioSource.Play();
-    }
+		private void Crouch()
+		{
+			cameraAnimator.SetBool("isHideing", true);
+			cameraSys.cameraButtonOn.SetActive(false);
 
-    private void Uncrouch()
-	{
-        cameraAnimator.SetBool("isHideing", false);
+			isCrouching = true;
 
-        if (!OwlAI.owlJumpscare)
-        {
-            cameraSys.cameraButtonOn.SetActive(true);
-        }
+			cameraAudioSource.clip = cameraAudioClip[0];
+			cameraAudioSource.Play();
+		}
 
-        isCrouching = false;
+		private void Uncrouch()
+		{
+			cameraAnimator.SetBool("isHideing", false);
 
-        crouchTime = Random.Range(3, 5);
+			if (!OwlAI.owlJumpscare)
+			{
+				cameraSys.cameraButtonOn.SetActive(true);
+			}
 
-        cameraAudioSource.clip = cameraAudioClip[1];
-        cameraAudioSource.Play();
-    }
+			isCrouching = false;
+
+			crouchTime = Random.Range(3, 5);
+
+			cameraAudioSource.clip = cameraAudioClip[1];
+			cameraAudioSource.Play();
+		}
+	}
 }

@@ -1,69 +1,73 @@
+using OneWeekAtPan.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+namespace OneWeekAtPan
 {
-	[HideInInspector] public static bool isPaused = false;
-
-	private MainCamera mainCamera;
-
-	[SerializeField] private GameObject pauseMenuObject;
-	private GameObject mainCameraObject;
-
-	void Start()
+	public class PauseMenu : MonoBehaviour
 	{
-		mainCameraObject = GameObject.Find("Main Camera");
+		[HideInInspector] public static bool isPaused = false;
 
-		mainCamera = mainCameraObject.GetComponent<MainCamera>();
-	}
+		private MainCamera mainCamera;
 
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Escape) && !Main.isJumpscare)
+		[SerializeField] private GameObject pauseMenuObject;
+		private GameObject mainCameraObject;
+
+		void Start()
 		{
-			if (isPaused)
-			{
-				Resume();
-			}
-			else
-			{
-				Pause();
-			}
+			mainCameraObject = GameObject.Find("Main Camera");
+
+			mainCamera = mainCameraObject.GetComponent<MainCamera>();
 		}
-	}
 
-	private void Pause()
-	{
-		pauseMenuObject.SetActive(true);
-
-		isPaused = true;
-		Time.timeScale = 0;
-	}
-
-	public void Resume()
-	{
-		pauseMenuObject.SetActive(false);
-
-		if (!MainCamera.isMouseControls)
+		void Update()
 		{
-			if (mainCamera.cameraAnimator.GetBool("isLeft"))
+			if (Input.GetKeyDown(KeyCode.Escape) && !Main.isJumpscare)
 			{
-				mainCamera.CenterFromLeft();
-			}
-			else if (mainCamera.cameraAnimator.GetBool("isRight"))
-			{
-				mainCamera.CenterFromRight();
+				if (isPaused)
+				{
+					Resume();
+				}
+				else
+				{
+					Pause();
+				}
 			}
 		}
 
-		isPaused = false;
-		Time.timeScale = 1;
-	}
+		private void Pause()
+		{
+			pauseMenuObject.SetActive(true);
 
-	public void Exit()
-	{
-		SceneManager.LoadScene("MainMenu");
-		isPaused = false;
-		Time.timeScale = 1;
+			isPaused = true;
+			Time.timeScale = 0;
+		}
+
+		public void Resume()
+		{
+			pauseMenuObject.SetActive(false);
+
+			if (!MainCamera.isMouseControls)
+			{
+				if (mainCamera.cameraAnimator.GetBool("isLeft"))
+				{
+					mainCamera.CenterFromLeft();
+				}
+				else if (mainCamera.cameraAnimator.GetBool("isRight"))
+				{
+					mainCamera.CenterFromRight();
+				}
+			}
+
+			isPaused = false;
+			Time.timeScale = 1;
+		}
+
+		public void Exit()
+		{
+			SceneManager.LoadScene("MainMenu");
+			isPaused = false;
+			Time.timeScale = 1;
+		}
 	}
 }

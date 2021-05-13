@@ -1,221 +1,226 @@
 using UnityEngine;
 using UnityEngine.UI;
+using OneWeekAtPan.Core;
 using System.Collections;
+using OneWeekAtPan.Systems;
 using UnityEngine.SceneManagement;
 
-public class TravisAI : MonoBehaviour
+namespace OneWeekAtPan.AI
 {
-    [Header("Variables:")]
-    public static int travisAILevel;
-    public int currentCamera = 0;
-    public float timeBetwenMovement;
-    public static float minTimeBetwenMovement;
-    public static float maxTimeBetwenMovement;
+	public class TravisAI : MonoBehaviour
+	{
+		[Header("Variables:")]
+		public static int travisAILevel;
+		public int currentCamera = 0;
+		public float timeBetwenMovement;
+		public static float minTimeBetwenMovement;
+		public static float maxTimeBetwenMovement;
 
-    [Header("Components:")]
-    [SerializeField] private RawImage cameraStatic;
-    [Space]
-    [SerializeField] private AudioClip[] travisAudioClip; // AudioClips: jumpScareSFX, lighFlickerSFX, staticSFX
-    private Main main;
-    private HeatSystem heatSystem;
-    private CameraSystem cameraSys;
-    private MainCamera mainCamera;
-    private AudioSource travisAudioSource;
+		[Header("Components:")]
+		[SerializeField] private RawImage cameraStatic;
+		[Space]
+		[SerializeField] private AudioClip[] travisAudioClip; // AudioClips: jumpScareSFX, lighFlickerSFX, staticSFX
+		private Main main;
+		private HeatSystem heatSystem;
+		private CameraSystem cameraSys;
+		private MainCamera mainCamera;
+		private AudioSource travisAudioSource;
 
-    [Header("GameObjects:")]
-    [SerializeField] private GameObject travisObject;
-    [SerializeField] private GameObject mainCameraObject;
-    [SerializeField] private GameObject mainCanvasObject;
-    [Space]
-    [SerializeField] private GameObject[] animatronicList;
-    [SerializeField] private GameObject[] animatronics;
-    [SerializeField] private GameObject[] roomLights;
-    [SerializeField] private GameObject[] roomObjects;
+		[Header("GameObjects:")]
+		[SerializeField] private GameObject travisObject;
+		[SerializeField] private GameObject mainCameraObject;
+		[SerializeField] private GameObject mainCanvasObject;
+		[Space]
+		[SerializeField] private GameObject[] animatronicList;
+		[SerializeField] private GameObject[] animatronics;
+		[SerializeField] private GameObject[] roomLights;
+		[SerializeField] private GameObject[] roomObjects;
 
-    void Start()
-    {
-        main = mainCanvasObject.GetComponent<Main>();
-        cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
-        heatSystem = mainCanvasObject.GetComponent<HeatSystem>();
-        mainCamera = mainCameraObject.GetComponent<MainCamera>();
-        travisAudioSource = travisObject.GetComponent<AudioSource>();
-
-        AIlevel.TravisMovingTime();
-        timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
-    }
-
-    void Update()
-    {
-		if (!heatSystem.isOvenOn)
+		void Start()
 		{
-            timeBetwenMovement -= Time.deltaTime;
+			main = mainCanvasObject.GetComponent<Main>();
+			cameraSys = mainCanvasObject.GetComponent<CameraSystem>();
+			heatSystem = mainCanvasObject.GetComponent<HeatSystem>();
+			mainCamera = mainCameraObject.GetComponent<MainCamera>();
+			travisAudioSource = travisObject.GetComponent<AudioSource>();
+
+			AIlevel.TravisMovingTime();
+			timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
 		}
 
-        if (timeBetwenMovement < 0)
-        {
-            timeBetwenMovement = 0;
-        }
-
-        // Kitchen phaze 0 >> Kitchen phaze 1
-        if (timeBetwenMovement <= 0 && currentCamera == 0)
-        {
-            if (cameraSys.cameraNumber == 6)
-            {
-                cameraStatic.CrossFadeAlpha(100, 0.1f, false);
-
-                if (cameraSys.isCameraActive)
-                {
-                    travisAudioSource.clip = travisAudioClip[2];
-                    travisAudioSource.Play();
-                }
-            }
-
-            animatronics[0].SetActive(false);
-            animatronics[1].SetActive(true);
-            currentCamera++;
-
-            AIlevel.TravisMovingTime();
-            timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
-
-            Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
-        }
-
-        // Kitchen phaze 1 >> Kitchen phaze 2
-        if (timeBetwenMovement <= 0 && currentCamera == 1)
-        {
-            if (cameraSys.cameraNumber == 6 || cameraSys.cameraNumber == 7)
-            {
-                cameraStatic.CrossFadeAlpha(100, 0.1f, false);
-
-                if (cameraSys.isCameraActive)
-                {
-                    travisAudioSource.clip = travisAudioClip[2];
-                    travisAudioSource.Play();
-                }
-            }
-
-            animatronics[1].SetActive(false);
-            animatronics[2].SetActive(true);
-            currentCamera++;
-
-            AIlevel.TravisMovingTime();
-            timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
-
-            Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
-        }
-
-        // Kitchen phaze 2 >> Office
-        if (timeBetwenMovement <= 0 && currentCamera == 2)
-        {
-            cameraStatic.CrossFadeAlpha(100, 0.1f, false);
-
-            cameraSys.cameraButtonOn.SetActive(false);
-            cameraSys.cameraButtonOff.SetActive(false);
-            mainCamera.cameraAnimator.SetBool("isHideing", false);
-
-            if (cameraSys.isCameraActive)
-            {
-                cameraSys.DeactivateCamSys();
-            }
-
-			foreach (var animatronic in animatronicList)
+		void Update()
+		{
+			if (!heatSystem.isOvenOn)
 			{
-                animatronic.SetActive(false);
+				timeBetwenMovement -= Time.deltaTime;
 			}
 
-            Main.isJumpscare = true;
+			if (timeBetwenMovement < 0)
+			{
+				timeBetwenMovement = 0;
+			}
 
-            currentCamera++;
-            timeBetwenMovement = 100f;
-            StartCoroutine(nameof(FlashLights));
+			// Kitchen phaze 0 >> Kitchen phaze 1
+			if (timeBetwenMovement <= 0 && currentCamera == 0)
+			{
+				if (cameraSys.cameraNumber == 6)
+				{
+					cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
-            Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
-            Invoke(nameof(JumpScare), 4f);
-        }
-    }
+					if (cameraSys.isCameraActive)
+					{
+						travisAudioSource.clip = travisAudioClip[2];
+						travisAudioSource.Play();
+					}
+				}
 
-	private void Die()
-    {
-        SceneManager.LoadScene("GameOver");
-    }
+				animatronics[0].SetActive(false);
+				animatronics[1].SetActive(true);
+				currentCamera++;
 
-    private void StaticEffectToNormalOppacity()
-    {
-        cameraStatic.CrossFadeAlpha(1, 0.1f, false);
-    }
+				AIlevel.TravisMovingTime();
+				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
 
-    private void JumpScare()
-    {
-        travisAudioSource.clip = travisAudioClip[0];
-        travisAudioSource.Play();
+				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
+			}
 
-        mainCamera.cameraAnimator.SetBool("isLeft", false);
-        mainCamera.cameraAnimator.SetBool("isRight", false);
+			// Kitchen phaze 1 >> Kitchen phaze 2
+			if (timeBetwenMovement <= 0 && currentCamera == 1)
+			{
+				if (cameraSys.cameraNumber == 6 || cameraSys.cameraNumber == 7)
+				{
+					cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
-        foreach (var objects in roomObjects)
-        {
-            objects.SetActive(false);
-        }
+					if (cameraSys.isCameraActive)
+					{
+						travisAudioSource.clip = travisAudioClip[2];
+						travisAudioSource.Play();
+					}
+				}
 
-        roomLights[1].SetActive(true);
+				animatronics[1].SetActive(false);
+				animatronics[2].SetActive(true);
+				currentCamera++;
 
-        animatronics[3].SetActive(false);
-        animatronics[4].SetActive(true);
+				AIlevel.TravisMovingTime();
+				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
 
-        Invoke(nameof(Die), 2f);
-    }
+				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
+			}
 
-    private IEnumerator FlashLights()
-    {
-        foreach (var light in roomLights)
-        {
-            light.SetActive(false);
-        }
+			// Kitchen phaze 2 >> Office
+			if (timeBetwenMovement <= 0 && currentCamera == 2)
+			{
+				cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
-        travisAudioSource.clip = travisAudioClip[1];
-        travisAudioSource.Play();
+				cameraSys.cameraButtonOn.SetActive(false);
+				cameraSys.cameraButtonOff.SetActive(false);
+				mainCamera.cameraAnimator.SetBool("isHideing", false);
 
-        yield return new WaitForSeconds(0.05f);
+				if (cameraSys.isCameraActive)
+				{
+					cameraSys.DeactivateCamSys();
+				}
 
-        foreach (var light in roomLights)
-        {
-            light.SetActive(true);
-        }
+				foreach (var animatronic in animatronicList)
+				{
+					animatronic.SetActive(false);
+				}
 
-        travisAudioSource.clip = travisAudioClip[1];
-        travisAudioSource.Play();
+				Main.isJumpscare = true;
 
-        yield return new WaitForSeconds(0.1f);
+				currentCamera++;
+				timeBetwenMovement = 100f;
+				StartCoroutine(nameof(FlashLights));
 
-        foreach (var light in roomLights)
-        {
-            light.SetActive(false);
-        }
+				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
+				Invoke(nameof(JumpScare), 4f);
+			}
+		}
 
-        animatronics[2].SetActive(false);
-        animatronics[3].SetActive(true);
+		private void Die()
+		{
+			SceneManager.LoadScene("GameOver");
+		}
 
-        travisAudioSource.clip = travisAudioClip[1];
-        travisAudioSource.Play();
+		private void StaticEffectToNormalOppacity()
+		{
+			cameraStatic.CrossFadeAlpha(1, 0.1f, false);
+		}
 
-        yield return new WaitForSeconds(0.1f);
+		private void JumpScare()
+		{
+			travisAudioSource.clip = travisAudioClip[0];
+			travisAudioSource.Play();
 
-        foreach (var light in roomLights)
-        {
-            light.SetActive(true);
-        }
+			mainCamera.cameraAnimator.SetBool("isLeft", false);
+			mainCamera.cameraAnimator.SetBool("isRight", false);
 
-        travisAudioSource.clip = travisAudioClip[1];
-        travisAudioSource.Play();
+			foreach (var objects in roomObjects)
+			{
+				objects.SetActive(false);
+			}
 
-        yield return new WaitForSeconds(0.5f);
+			roomLights[1].SetActive(true);
 
-        foreach (var light in roomLights)
-        {
-            light.SetActive(false);
-        }
+			animatronics[3].SetActive(false);
+			animatronics[4].SetActive(true);
 
-        travisAudioSource.clip = travisAudioClip[1];
-        travisAudioSource.Play();
-    }
+			Invoke(nameof(Die), 2f);
+		}
+
+		private IEnumerator FlashLights()
+		{
+			foreach (var light in roomLights)
+			{
+				light.SetActive(false);
+			}
+
+			travisAudioSource.clip = travisAudioClip[1];
+			travisAudioSource.Play();
+
+			yield return new WaitForSeconds(0.05f);
+
+			foreach (var light in roomLights)
+			{
+				light.SetActive(true);
+			}
+
+			travisAudioSource.clip = travisAudioClip[1];
+			travisAudioSource.Play();
+
+			yield return new WaitForSeconds(0.1f);
+
+			foreach (var light in roomLights)
+			{
+				light.SetActive(false);
+			}
+
+			animatronics[2].SetActive(false);
+			animatronics[3].SetActive(true);
+
+			travisAudioSource.clip = travisAudioClip[1];
+			travisAudioSource.Play();
+
+			yield return new WaitForSeconds(0.1f);
+
+			foreach (var light in roomLights)
+			{
+				light.SetActive(true);
+			}
+
+			travisAudioSource.clip = travisAudioClip[1];
+			travisAudioSource.Play();
+
+			yield return new WaitForSeconds(0.5f);
+
+			foreach (var light in roomLights)
+			{
+				light.SetActive(false);
+			}
+
+			travisAudioSource.clip = travisAudioClip[1];
+			travisAudioSource.Play();
+		}
+	}
 }

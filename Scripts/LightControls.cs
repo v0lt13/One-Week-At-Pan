@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class LightControls : MonoBehaviour
+namespace OneWeekAtPan
 {
-    private int heKnowsHowUseLights = 0;
+	public class LightControls : MonoBehaviour
+	{
+		private int heKnowsHowUseLights = 0;
 
-    public GameObject lightControls;
+		public GameObject lightControls;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            lightControls.SetActive(false);
-            heKnowsHowUseLights = 1;
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.X))
+			{
+				lightControls.SetActive(false);
+				heKnowsHowUseLights = 1;
 
-            PlayerPrefs.SetInt("heKnowsLights", heKnowsHowUseLights);
-        }
-    }
+				PlayerPrefs.SetInt("heKnowsLights", heKnowsHowUseLights);
+			}
+		}
+	}
 }

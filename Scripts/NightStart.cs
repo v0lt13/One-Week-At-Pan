@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class NightStart : MonoBehaviour
+namespace OneWeekAtPan
 {
-    [SerializeField] private GameObject[] canvasTextObjects;
-
-	void Update()
+	public class NightStart : MonoBehaviour
 	{
-		Invoke(nameof(EnableLoadingText), 1.8f);
-	}
+		[SerializeField] private GameObject[] canvasTextObjects;
 
-	private void EnableLoadingText()
-	{
-		canvasTextObjects[0].SetActive(false);
-		canvasTextObjects[1].SetActive(true);
+		void Update()
+		{
+			Invoke(nameof(EnableLoadingText), 1.8f);
+		}
+
+		private void EnableLoadingText()
+		{
+			canvasTextObjects[0].SetActive(false);
+			canvasTextObjects[1].SetActive(true);
+		}
 	}
 }

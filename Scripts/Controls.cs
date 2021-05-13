@@ -1,68 +1,73 @@
 using UnityEngine;
+using OneWeekAtPan.Core;
+using OneWeekAtPan.Systems;
 
-public class Controls : MonoBehaviour
+namespace OneWeekAtPan
 {
-    private int heKnowsHowToPlayKeyboard = 0;
-    private int heKnowsHowToPlayMouse = 0;
-
-    private CameraSystem cameraSys;
-
-    public GameObject keyboardControls;
-    public GameObject mouseControls;
-    [SerializeField] private GameObject mainCanvas;
-
-    void Start()
+	public class Controls : MonoBehaviour
 	{
-        cameraSys = mainCanvas.GetComponent<CameraSystem>();
+		private int heKnowsHowToPlayKeyboard = 0;
+		private int heKnowsHowToPlayMouse = 0;
 
-        if (MainCamera.isMouseControls)
-        {
-            foreach (var triggers in cameraSys.lookTriggers)
-            {
-                triggers.SetActive(true);
-            }
+		private CameraSystem cameraSys;
 
-            if (PlayerPrefs.GetInt("heKnowsMouse") == 0)
-            {
-                mouseControls.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (var triggers in cameraSys.lookTriggers)
-            {
-                triggers.SetActive(false);
-            }
+		public GameObject keyboardControls;
+		public GameObject mouseControls;
+		[SerializeField] private GameObject mainCanvas;
 
-            if (PlayerPrefs.GetInt("heKnowsKeyboard") == 0)
-            {
-                keyboardControls.SetActive(true);
-            }
-        }
-    }
+		void Start()
+		{
+			cameraSys = mainCanvas.GetComponent<CameraSystem>();
 
-	void Update()
-	{
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            if (MainCamera.isMouseControls)
-            {
-                mouseControls.SetActive(false);
+			if (MainCamera.isMouseControls)
+			{
+				foreach (var triggers in cameraSys.lookTriggers)
+				{
+					triggers.SetActive(true);
+				}
 
-                heKnowsHowToPlayMouse = 1;
+				if (PlayerPrefs.GetInt("heKnowsMouse") == 0)
+				{
+					mouseControls.SetActive(true);
+				}
+			}
+			else
+			{
+				foreach (var triggers in cameraSys.lookTriggers)
+				{
+					triggers.SetActive(false);
+				}
 
-                PlayerPrefs.SetInt("heKnowsMouse", heKnowsHowToPlayMouse);
-                PlayerPrefs.Save();
-            }
-            else
-            {
-                keyboardControls.SetActive(false);
+				if (PlayerPrefs.GetInt("heKnowsKeyboard") == 0)
+				{
+					keyboardControls.SetActive(true);
+				}
+			}
+		}
 
-                heKnowsHowToPlayKeyboard = 1;
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.X))
+			{
+				if (MainCamera.isMouseControls)
+				{
+					mouseControls.SetActive(false);
 
-                PlayerPrefs.SetInt("heKnowsKeyboard", heKnowsHowToPlayKeyboard);
-                PlayerPrefs.Save();
-            }
-        }
-    }
+					heKnowsHowToPlayMouse = 1;
+
+					PlayerPrefs.SetInt("heKnowsMouse", heKnowsHowToPlayMouse);
+					PlayerPrefs.Save();
+				}
+				else
+				{
+					keyboardControls.SetActive(false);
+
+					heKnowsHowToPlayKeyboard = 1;
+
+					PlayerPrefs.SetInt("heKnowsKeyboard", heKnowsHowToPlayKeyboard);
+					PlayerPrefs.Save();
+				}
+			}
+		}
+	}
 }

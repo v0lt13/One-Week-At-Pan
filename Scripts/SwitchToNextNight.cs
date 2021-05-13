@@ -1,59 +1,63 @@
 using UnityEngine;
+using OneWeekAtPan.Core;
 using UnityEngine.SceneManagement;
 
-public class SwitchToNextNight : MonoBehaviour
+namespace OneWeekAtPan
 {
-    [SerializeField] private float sceneSwitchTime;
-
-	void Awake()
+	public class SwitchToNextNight : MonoBehaviour
 	{
-		Main.night++;
+		[SerializeField] private float sceneSwitchTime;
 
-		if (Main.night >= 8)
+		void Awake()
 		{
-			Main.night = 8;
+			Main.night++;
+
+			if (Main.night >= 8)
+			{
+				Main.night = 8;
+			}
+
+			PlayerPrefs.SetInt("Night", Main.night);
+			PlayerPrefs.Save();
 		}
 
-		PlayerPrefs.SetInt("Night", Main.night);
-		PlayerPrefs.Save();
-	}
-
-    void Start()
-    {
-		Invoke(nameof(GoToNextNight), sceneSwitchTime);
-	}
-
-	public void GoToNextNight()
-	{
-		switch (PlayerPrefs.GetInt("Night"))
+		void Start()
 		{
-			case 2:
-				SceneManager.LoadScene("Night02S");
-				break;
+			Invoke(nameof(GoToNextNight), sceneSwitchTime);
+		}
 
-			case 3:
-				SceneManager.LoadScene("Night03S");
-				break;
+		public void GoToNextNight()
+		{
+			switch (PlayerPrefs.GetInt("Night"))
+			{
+				case 2:
+					SceneManager.LoadScene("Night02S");
+					break;
 
-			case 4:
-				SceneManager.LoadScene("Night04S");
-				break;
+				case 3:
+					SceneManager.LoadScene("Night03S");
+					break;
 
-			case 5:
-				SceneManager.LoadScene("Night05S");
-				break;
+				case 4:
+					SceneManager.LoadScene("Night04S");
+					break;
 
-			case 6:
-				SceneManager.LoadScene("Night06S");
-				break;
+				case 5:
+					SceneManager.LoadScene("Night05S");
+					break;
 
-			case 7:
-				SceneManager.LoadScene("Night07S");
-				break;
+				case 6:
+					SceneManager.LoadScene("Night06S");
+					break;
 
-			default:
-				SceneManager.LoadScene("Ending");
-				break;
+				case 7:
+					SceneManager.LoadScene("Night07S");
+					break;
+
+				default:
+					SceneManager.LoadScene("Ending");
+					break;
+			}
 		}
 	}
 }
