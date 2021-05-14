@@ -6,7 +6,7 @@ namespace OneWeekAtPan
 {
 	public class PauseMenu : MonoBehaviour
 	{
-		[HideInInspector] public static bool isPaused = false;
+		[HideInInspector] public static bool IS_PAUSED = false;
 
 		private MainCamera mainCamera;
 
@@ -22,9 +22,9 @@ namespace OneWeekAtPan
 
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Escape) && !Main.isJumpscare)
+			if (Input.GetKeyDown(KeyCode.Escape) && !Main.IS_JUMPSCARE)
 			{
-				if (isPaused)
+				if (IS_PAUSED)
 				{
 					Resume();
 				}
@@ -39,7 +39,7 @@ namespace OneWeekAtPan
 		{
 			pauseMenuObject.SetActive(true);
 
-			isPaused = true;
+			IS_PAUSED = true;
 			Time.timeScale = 0;
 		}
 
@@ -47,7 +47,7 @@ namespace OneWeekAtPan
 		{
 			pauseMenuObject.SetActive(false);
 
-			if (!MainCamera.isMouseControls)
+			if (!MainCamera.IS_MOUSE_CONTROLS)
 			{
 				if (mainCamera.cameraAnimator.GetBool("isLeft"))
 				{
@@ -59,14 +59,14 @@ namespace OneWeekAtPan
 				}
 			}
 
-			isPaused = false;
+			IS_PAUSED = false;
 			Time.timeScale = 1;
 		}
 
 		public void Exit()
 		{
 			SceneManager.LoadScene("MainMenu");
-			isPaused = false;
+			IS_PAUSED = false;
 			Time.timeScale = 1;
 		}
 	}

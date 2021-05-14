@@ -12,8 +12,8 @@ namespace OneWeekAtPan.AI
 		[Header("Variables:")]
 		public int currentCamera = 0;
 		public float timeBetwenMovement;
-		public static float minTimeBetwenMovement;
-		public static float maxTimeBetwenMovement;
+		public static float MIN_TIME_BETWEN_MOVEMENT;
+		public static float MAX_TIME_BETWEN_MOVEMENT;
 
 		[Header("Components:")]
 		[SerializeField] private RawImage cameraStatic;
@@ -58,7 +58,7 @@ namespace OneWeekAtPan.AI
 			StartCoroutine(FlashLightsFastWithSound());
 
 			AIlevel.EyeDemonMovingTime();
-			timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+			timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 		}
 
 		void Update()
@@ -70,7 +70,7 @@ namespace OneWeekAtPan.AI
 				timeBetwenMovement = 0;
 			}
 
-			if (Main.night != 1 && travisAI.currentCamera == 3)
+			if (Main.NIGHT != 1 && travisAI.currentCamera == 3)
 			{
 				foreach (var animatronic in animatronics)
 				{
@@ -99,7 +99,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.EyeDemonMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
 
@@ -122,7 +122,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.EyeDemonMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
 
@@ -145,7 +145,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.EyeDemonMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
 
@@ -172,7 +172,7 @@ namespace OneWeekAtPan.AI
 					animatronics[4].SetActive(true);
 					timeBetwenMovement = Random.Range(3, 5);
 
-					if (!Main.isJumpscare)
+					if (!Main.IS_JUMPSCARE)
 					{
 						StartCoroutine(nameof(FlashLightsFast));
 					}
@@ -182,7 +182,7 @@ namespace OneWeekAtPan.AI
 					animatronics[5].SetActive(true);
 
 					AIlevel.EyeDemonMovingTime();
-					timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+					timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
@@ -228,11 +228,11 @@ namespace OneWeekAtPan.AI
 				}
 
 				AIlevel.EyeDemonMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 			}
 
 			// Hallway02 door|| Hallway01 door >> Office
-			if (timeBetwenMovement <= 0 && !mainCamera.isCrouching && !Main.isJumpscare && (currentCamera == 4 || currentCamera == 6))
+			if (timeBetwenMovement <= 0 && !mainCamera.isCrouching && !Main.IS_JUMPSCARE && (currentCamera == 4 || currentCamera == 6))
 			{
 				cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
@@ -244,7 +244,7 @@ namespace OneWeekAtPan.AI
 					cameraSys.DeactivateCamSys();
 				}
 
-				Main.isJumpscare = true;
+				Main.IS_JUMPSCARE = true;
 
 				timeBetwenMovement = 100f;
 				StartCoroutine(nameof(FlashLights));

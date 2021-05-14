@@ -19,7 +19,7 @@ namespace OneWeekAtPan
 		{
 			cameraSys = mainCanvas.GetComponent<CameraSystem>();
 
-			if (MainCamera.isMouseControls)
+			if (MainCamera.IS_MOUSE_CONTROLS)
 			{
 				foreach (var triggers in cameraSys.lookTriggers)
 				{
@@ -49,7 +49,7 @@ namespace OneWeekAtPan
 		{
 			if (Input.GetKeyDown(KeyCode.X))
 			{
-				if (MainCamera.isMouseControls)
+				if (MainCamera.IS_MOUSE_CONTROLS)
 				{
 					mouseControls.SetActive(false);
 

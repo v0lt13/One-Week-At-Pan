@@ -8,7 +8,7 @@ namespace OneWeekAtPan.Core
 {
 	public class MainMenu : MonoBehaviour
 	{
-		public static int starNumber = 0;
+		public static int STAR_NUMBER = 0;
 		private int vsync;
 		private int fullscreen;
 		private int showFPS;
@@ -164,13 +164,13 @@ namespace OneWeekAtPan.Core
 		{
 			if (controlsType_)
 			{
-				MainCamera.isMouseControls = false;
+				MainCamera.IS_MOUSE_CONTROLS = false;
 				controlsText.text = "Keyboard";
 				controlsType = 1;
 			}
 			else if (!controlsType_)
 			{
-				MainCamera.isMouseControls = true;
+				MainCamera.IS_MOUSE_CONTROLS = true;
 				controlsText.text = "Mouse";
 				controlsType = 0;
 			}
@@ -220,12 +220,12 @@ namespace OneWeekAtPan.Core
 		{
 			if (fps)
 			{
-				Framerate.showFPS = true;
+				Framerate.SHOW_FPS = true;
 				showFPS = 1;
 			}
 			else if (!fps)
 			{
-				Framerate.showFPS = false;
+				Framerate.SHOW_FPS = false;
 				showFPS = 0;
 			}
 

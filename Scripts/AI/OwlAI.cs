@@ -9,12 +9,12 @@ namespace OneWeekAtPan.AI
 	public class OwlAI : MonoBehaviour
 	{
 		[Header("Variables:")]
-		public static int owlAILevel;
+		public static int OWL_AI_LEVEL;
 		public int currentCamera = 0;
 		public float timeBetwenMovement;
-		public static float minTimeBetwenMovement;
-		public static float maxTimeBetwenMovement;
-		public static bool owlJumpscare;
+		public static float MIN_TIME_BETWEN_MOVEMENT;
+		public static float MAX_TIME_BETWEN_MOVEMENT;
+		public static bool IS_OWL_IN_OFFICE;
 
 		[Header("Components:")]
 		[SerializeField] private RawImage cameraStatic;
@@ -43,7 +43,7 @@ namespace OneWeekAtPan.AI
 			owlAudioSource = owlObject.GetComponent<AudioSource>();
 
 			AIlevel.OwlMovingTime();
-			timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+			timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 		}
 
 		void Update()
@@ -74,7 +74,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -98,7 +98,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -132,7 +132,7 @@ namespace OneWeekAtPan.AI
 				}
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
 
@@ -155,7 +155,7 @@ namespace OneWeekAtPan.AI
 				currentCamera = 2;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -179,7 +179,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -203,7 +203,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -244,11 +244,11 @@ namespace OneWeekAtPan.AI
 				currentCamera = 3;
 
 				AIlevel.OwlMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 			}
 
 			// Vent >> Office
-			if (timeBetwenMovement <= 0 && currentCamera == 6 && !mainCamera.isCrouching && !Main.isJumpscare)
+			if (timeBetwenMovement <= 0 && currentCamera == 6 && !mainCamera.isCrouching && !Main.IS_JUMPSCARE)
 			{
 				cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
@@ -260,7 +260,7 @@ namespace OneWeekAtPan.AI
 					cameraSys.DeactivateCamSys();
 				}
 
-				owlJumpscare = true;
+				IS_OWL_IN_OFFICE = true;
 
 				animatronics[6].SetActive(false);
 				animatronics[7].SetActive(true);

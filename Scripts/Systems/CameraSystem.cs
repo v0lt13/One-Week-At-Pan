@@ -46,7 +46,7 @@ namespace OneWeekAtPan.Systems
 			staticEffect = staticEffectObject.GetComponent<RawImage>();
 			mainAudioSource = cameraSystem.GetComponent<AudioSource>();
 
-			if (Main.night != 1)
+			if (Main.NIGHT != 1)
 			{
 				heatSystem = GetComponent<HeatSystem>();
 				lightControls = GetComponent<LightControls>();
@@ -60,7 +60,7 @@ namespace OneWeekAtPan.Systems
 
 		public void ActivateCamSys()
 		{
-			if (!mainAnimator.GetBool("isLeft") && !mainAnimator.GetBool("isRight") && !mainAnimator.GetBool("isHideing") && !Main.isJumpscare)
+			if (!mainAnimator.GetBool("isLeft") && !mainAnimator.GetBool("isRight") && !mainAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE)
 			{
 				foreach (var cam in cameraSystemObjects)
 				{
@@ -76,7 +76,7 @@ namespace OneWeekAtPan.Systems
 					roomNameText.text = PlayerPrefs.GetString("camName");
 				}
 
-				if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1 && lightControls != null)
+				if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.NIGHT != 1 && lightControls != null)
 				{
 					lightControls.lightControls.SetActive(true);
 				}
@@ -91,7 +91,7 @@ namespace OneWeekAtPan.Systems
 				cameraButtonOn.SetActive(false);
 				cameraButtonOff.SetActive(true);
 
-				if (MainCamera.isMouseControls)
+				if (MainCamera.IS_MOUSE_CONTROLS)
 				{
 					foreach (var triggers in lookTriggers)
 					{
@@ -165,7 +165,7 @@ namespace OneWeekAtPan.Systems
 
 			RenderSettings.ambientLight = Color.black;
 
-			if (MainCamera.isMouseControls)
+			if (MainCamera.IS_MOUSE_CONTROLS)
 			{
 				foreach (var triggers in lookTriggers)
 				{
@@ -173,7 +173,7 @@ namespace OneWeekAtPan.Systems
 				}
 			}
 
-			if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.night != 1 && lightControls != null)
+			if (PlayerPrefs.GetInt("heKnowsLights") != 1 && Main.NIGHT != 1 && lightControls != null)
 			{
 				lightControls.lightControls.SetActive(false);
 			}
@@ -432,7 +432,7 @@ namespace OneWeekAtPan.Systems
 
 		private void DisableCameraLight()
 		{
-			if (Main.night != 1)
+			if (Main.NIGHT != 1)
 			{
 				heatSystem.DisableCameraLight();
 			}

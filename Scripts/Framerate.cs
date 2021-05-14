@@ -8,7 +8,7 @@ namespace OneWeekAtPan
 		private int frameCounter = 0;
 		private float timeCounter = 0.0f;
 		private const float REFRESH_TIME = 0.1f;
-		[HideInInspector] public static bool showFPS;
+		[HideInInspector] public static bool SHOW_FPS;
 
 		[SerializeField] private Text framerateText;
 

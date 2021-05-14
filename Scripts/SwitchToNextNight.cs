@@ -10,14 +10,14 @@ namespace OneWeekAtPan
 
 		void Awake()
 		{
-			Main.night++;
+			Main.NIGHT++;
 
-			if (Main.night >= 8)
+			if (Main.NIGHT >= 8)
 			{
-				Main.night = 8;
+				Main.NIGHT = 8;
 			}
 
-			PlayerPrefs.SetInt("Night", Main.night);
+			PlayerPrefs.SetInt("Night", Main.NIGHT);
 			PlayerPrefs.Save();
 		}
 

@@ -8,9 +8,9 @@ namespace OneWeekAtPan.Core
 {
 	public class Main : MonoBehaviour
 	{
-		public static bool isJumpscare = false;
-		public static int night = 1;
-		public static int nightHour = 12;
+		public static bool IS_JUMPSCARE = false;
+		public static int NIGHT = 1;
+		public static int NIGHT_HOUR = 12;
 		[SerializeField] private float amountOfTime;
 		private bool isPhoneCallMuted = false;
 
@@ -37,21 +37,21 @@ namespace OneWeekAtPan.Core
 		void Awake()
 		{
 			amountOfTime = 360f;
-			nightHour = 12;
-			isJumpscare = false;
-			OwlAI.owlJumpscare = false;
+			NIGHT_HOUR = 12;
+			IS_JUMPSCARE = false;
+			OwlAI.IS_OWL_IN_OFFICE = false;
 
 			if (PlayerPrefs.GetInt("Night") != 0)
 			{
-				night = PlayerPrefs.GetInt("Night");
+				NIGHT = PlayerPrefs.GetInt("Night");
 			}
 
-			if (night == 8)
+			if (NIGHT == 8)
 			{
-				night = 7;
+				NIGHT = 7;
 			}
 
-			if (Framerate.showFPS)
+			if (Framerate.SHOW_FPS)
 			{
 				framerate.SetActive(true);
 			}
@@ -66,11 +66,11 @@ namespace OneWeekAtPan.Core
 			SetAIlevel();
 
 			// For debug
-			print(PanAI.panAIlevel);
-			print(MikeyAI.mikeyAIlevel);
-			print(TravisAI.travisAILevel);
-			print(OwlAI.owlAILevel);
-			print(night);
+			print(PanAI.PAN_AI_LEVEL);
+			print(MikeyAI.MIKEY_AI_LEVEL);
+			print(TravisAI.TRAVIS_AI_LEVEL);
+			print(OwlAI.OWL_AI_LEVEL);
+			print(NIGHT);
 		}
 
 		void Start()
@@ -111,7 +111,7 @@ namespace OneWeekAtPan.Core
 				}
 			}
 
-			if (PauseMenu.isPaused && !isPhoneCallMuted)
+			if (PauseMenu.IS_PAUSED && !isPhoneCallMuted)
 			{
 				GameObject.Find("Call").GetComponent<AudioSource>().Pause();
 
@@ -120,7 +120,7 @@ namespace OneWeekAtPan.Core
 					button.interactable = false;
 				}
 			}
-			else if (!PauseMenu.isPaused && !isPhoneCallMuted)
+			else if (!PauseMenu.IS_PAUSED && !isPhoneCallMuted)
 			{
 				GameObject.Find("Call").GetComponent<AudioSource>().UnPause();
 
@@ -146,52 +146,52 @@ namespace OneWeekAtPan.Core
 
 		private void SetAIlevel()
 		{
-			switch (night)
+			switch (NIGHT)
 			{
 				case 1:
-					PanAI.panAIlevel = 1;
-					MikeyAI.mikeyAIlevel = 1;
+					PanAI.PAN_AI_LEVEL = 1;
+					MikeyAI.MIKEY_AI_LEVEL = 1;
 					break;
 
 				case 2:
-					PanAI.panAIlevel = 3;
-					MikeyAI.mikeyAIlevel = 4;
-					TravisAI.travisAILevel = 6;
+					PanAI.PAN_AI_LEVEL = 3;
+					MikeyAI.MIKEY_AI_LEVEL = 4;
+					TravisAI.TRAVIS_AI_LEVEL = 6;
 					break;
 
 				case 3:
-					PanAI.panAIlevel = 5;
-					MikeyAI.mikeyAIlevel = 5;
-					TravisAI.travisAILevel = 8;
-					OwlAI.owlAILevel = 6;
+					PanAI.PAN_AI_LEVEL = 5;
+					MikeyAI.MIKEY_AI_LEVEL = 5;
+					TravisAI.TRAVIS_AI_LEVEL = 8;
+					OwlAI.OWL_AI_LEVEL = 6;
 					break;
 
 				case 4:
-					PanAI.panAIlevel = 9;
-					MikeyAI.mikeyAIlevel = 7;
-					TravisAI.travisAILevel = 10;
-					OwlAI.owlAILevel = 8;
+					PanAI.PAN_AI_LEVEL = 9;
+					MikeyAI.MIKEY_AI_LEVEL = 7;
+					TravisAI.TRAVIS_AI_LEVEL = 10;
+					OwlAI.OWL_AI_LEVEL = 8;
 					break;
 
 				case 5:
-					PanAI.panAIlevel = 13;
-					MikeyAI.mikeyAIlevel = 15;
-					TravisAI.travisAILevel = 13;
-					OwlAI.owlAILevel = 10;
+					PanAI.PAN_AI_LEVEL = 13;
+					MikeyAI.MIKEY_AI_LEVEL = 15;
+					TravisAI.TRAVIS_AI_LEVEL = 13;
+					OwlAI.OWL_AI_LEVEL = 10;
 					break;
 
 				case 6:
-					PanAI.panAIlevel = 15;
-					MikeyAI.mikeyAIlevel = 16;
-					TravisAI.travisAILevel = 15;
-					OwlAI.owlAILevel = 14;
+					PanAI.PAN_AI_LEVEL = 15;
+					MikeyAI.MIKEY_AI_LEVEL = 16;
+					TravisAI.TRAVIS_AI_LEVEL = 15;
+					OwlAI.OWL_AI_LEVEL = 14;
 					break;
 
 				case 7:
-					PanAI.panAIlevel = 17;
-					MikeyAI.mikeyAIlevel = 18;
-					TravisAI.travisAILevel = 18;
-					OwlAI.owlAILevel = 19;
+					PanAI.PAN_AI_LEVEL = 17;
+					MikeyAI.MIKEY_AI_LEVEL = 18;
+					TravisAI.TRAVIS_AI_LEVEL = 18;
+					OwlAI.OWL_AI_LEVEL = 19;
 					break;
 			}
 		}
@@ -201,7 +201,7 @@ namespace OneWeekAtPan.Core
 			if (Mathf.Floor(amountOfTime) == 300f)
 			{
 				amountOfTime = 300f;
-				nightHour = 1;
+				NIGHT_HOUR = 1;
 
 				AIlevel.PanMovingTime();
 				AIlevel.MikeyMovingTime();
@@ -209,21 +209,21 @@ namespace OneWeekAtPan.Core
 
 				if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
 				{
-					panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
-					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+					panAI.timeBetwenMovement = Random.Range(PanAI.MIN_TIME_BETWEN_MOVEMENT, PanAI.MAX_TIME_BETWEN_MOVEMENT);
+					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.MIN_TIME_BETWEN_MOVEMENT, MikeyAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (owlAI != null && owlAI.currentCamera != 6)
 				{
-					owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+					owlAI.timeBetwenMovement = Random.Range(OwlAI.MIN_TIME_BETWEN_MOVEMENT, OwlAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 			}
 			else if (Mathf.Floor(amountOfTime) == 240f)
 			{
 				amountOfTime = 240f;
-				nightHour = 2;
+				NIGHT_HOUR = 2;
 
 				AIlevel.PanMovingTime();
 				AIlevel.MikeyMovingTime();
@@ -231,21 +231,21 @@ namespace OneWeekAtPan.Core
 
 				if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
 				{
-					panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
-					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+					panAI.timeBetwenMovement = Random.Range(PanAI.MIN_TIME_BETWEN_MOVEMENT, PanAI.MAX_TIME_BETWEN_MOVEMENT);
+					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.MIN_TIME_BETWEN_MOVEMENT, MikeyAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (owlAI != null && owlAI.currentCamera != 6)
 				{
-					owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+					owlAI.timeBetwenMovement = Random.Range(OwlAI.MIN_TIME_BETWEN_MOVEMENT, OwlAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 			}
 			else if (Mathf.Floor(amountOfTime) == 180f)
 			{
 				amountOfTime = 180f;
-				nightHour = 3;
+				NIGHT_HOUR = 3;
 
 				AIlevel.PanMovingTime();
 				AIlevel.MikeyMovingTime();
@@ -254,27 +254,27 @@ namespace OneWeekAtPan.Core
 
 				if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
 				{
-					panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
-					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+					panAI.timeBetwenMovement = Random.Range(PanAI.MIN_TIME_BETWEN_MOVEMENT, PanAI.MAX_TIME_BETWEN_MOVEMENT);
+					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.MIN_TIME_BETWEN_MOVEMENT, MikeyAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (owlAI != null && owlAI.currentCamera != 6)
 				{
-					owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+					owlAI.timeBetwenMovement = Random.Range(OwlAI.MIN_TIME_BETWEN_MOVEMENT, OwlAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				if (eyeDemonObject != null && !isJumpscare)
+				if (eyeDemonObject != null && !IS_JUMPSCARE)
 				{
 					eyeDemonObject.SetActive(true);
-					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
+					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.MIN_TIME_BETWEN_MOVEMENT, EyeDemonAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 			}
 			else if (Mathf.Floor(amountOfTime) == 120f)
 			{
 				amountOfTime = 120f;
-				nightHour = 4;
+				NIGHT_HOUR = 4;
 
 				AIlevel.PanMovingTime();
 				AIlevel.MikeyMovingTime();
@@ -283,26 +283,26 @@ namespace OneWeekAtPan.Core
 
 				if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
 				{
-					panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
-					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+					panAI.timeBetwenMovement = Random.Range(PanAI.MIN_TIME_BETWEN_MOVEMENT, PanAI.MAX_TIME_BETWEN_MOVEMENT);
+					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.MIN_TIME_BETWEN_MOVEMENT, MikeyAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (owlAI != null && owlAI.currentCamera != 6)
 				{
-					owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+					owlAI.timeBetwenMovement = Random.Range(OwlAI.MIN_TIME_BETWEN_MOVEMENT, OwlAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (eyeDemonObject != null && eyeDemonAI.currentCamera != 6 && eyeDemonAI.currentCamera != 4)
 				{
-					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
+					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.MIN_TIME_BETWEN_MOVEMENT, EyeDemonAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 			}
 			else if (Mathf.Floor(amountOfTime) == 60f)
 			{
 				amountOfTime = 60f;
-				nightHour = 5;
+				NIGHT_HOUR = 5;
 
 				AIlevel.PanMovingTime();
 				AIlevel.MikeyMovingTime();
@@ -311,35 +311,35 @@ namespace OneWeekAtPan.Core
 
 				if (panAI.currentCamera != 4 && mikeyAI.currentCamera != 5)
 				{
-					panAI.timeBetwenMovement = Random.Range(PanAI.minTimeBetwenMovement, PanAI.maxTimeBetwenMovement);
-					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.minTimeBetwenMovement, MikeyAI.maxTimeBetwenMovement);
+					panAI.timeBetwenMovement = Random.Range(PanAI.MIN_TIME_BETWEN_MOVEMENT, PanAI.MAX_TIME_BETWEN_MOVEMENT);
+					mikeyAI.timeBetwenMovement = Random.Range(MikeyAI.MIN_TIME_BETWEN_MOVEMENT, MikeyAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (owlAI != null && owlAI.currentCamera != 6)
 				{
-					owlAI.timeBetwenMovement = Random.Range(OwlAI.minTimeBetwenMovement, OwlAI.maxTimeBetwenMovement);
+					owlAI.timeBetwenMovement = Random.Range(OwlAI.MIN_TIME_BETWEN_MOVEMENT, OwlAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
 				if (eyeDemonObject != null && eyeDemonAI.currentCamera != 6 && eyeDemonAI.currentCamera != 4)
 				{
-					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.minTimeBetwenMovement, EyeDemonAI.maxTimeBetwenMovement);
+					eyeDemonAI.timeBetwenMovement = Random.Range(EyeDemonAI.MIN_TIME_BETWEN_MOVEMENT, EyeDemonAI.MAX_TIME_BETWEN_MOVEMENT);
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 			}
 			else if (Mathf.Floor(amountOfTime) == 0f)
 			{
 				amountOfTime = 0f;
-				nightHour = 6;
+				NIGHT_HOUR = 6;
 
-				if (night == 7 && MainMenu.starNumber == 0)
+				if (NIGHT == 7 && MainMenu.STAR_NUMBER == 0)
 				{
-					MainMenu.starNumber = 1;
-					PlayerPrefs.SetInt("stars", MainMenu.starNumber);
+					MainMenu.STAR_NUMBER = 1;
+					PlayerPrefs.SetInt("stars", MainMenu.STAR_NUMBER);
 					PlayerPrefs.Save();
 				}
 
-				nightHourText.text = $"{nightHour} AM";
+				nightHourText.text = $"{NIGHT_HOUR} AM";
 				SceneManager.LoadSceneAsync("6AM");
 			}
 		}

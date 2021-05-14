@@ -9,7 +9,7 @@ namespace OneWeekAtPan.Core
 		[Header("Variables:")]
 		public float crouchTime;
 		public bool isCrouching = false;
-		public static bool isMouseControls;
+		public static bool IS_MOUSE_CONTROLS;
 
 		[Header("Components:")]
 		[HideInInspector] public Animator cameraAnimator;
@@ -42,32 +42,32 @@ namespace OneWeekAtPan.Core
 				crouchTime -= Time.deltaTime;
 			}
 
-			if (Input.GetKeyDown(KeyCode.A) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			if (Input.GetKeyDown(KeyCode.A) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED && !IS_MOUSE_CONTROLS)
 			{
 				LookLeft();
 			}
 
-			if (Input.GetKeyDown(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			if (Input.GetKeyDown(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED && !IS_MOUSE_CONTROLS)
 			{
 				LookRight();
 			}
 
-			if (Input.GetKeyUp(KeyCode.A) && cameraSys.isCameraActive == false && cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			if (Input.GetKeyUp(KeyCode.A) && cameraSys.isCameraActive == false && cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED && !IS_MOUSE_CONTROLS)
 			{
 				CenterFromLeft();
 			}
 
-			if (Input.GetKeyUp(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused && !isMouseControls)
+			if (Input.GetKeyUp(KeyCode.D) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED && !IS_MOUSE_CONTROLS)
 			{
 				CenterFromRight();
 			}
 
-			if (Input.GetKey(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.isJumpscare && !PauseMenu.isPaused)
+			if (Input.GetKey(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED)
 			{
 				Crouch();
 			}
 
-			if (Input.GetKeyUp(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !Main.isJumpscare && !PauseMenu.isPaused)
+			if (Input.GetKeyUp(KeyCode.LeftControl) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED)
 			{
 				Uncrouch();
 			}
@@ -83,7 +83,7 @@ namespace OneWeekAtPan.Core
 		{
 			cameraAnimator.SetBool("isLeft", false);
 
-			if (!OwlAI.owlJumpscare)
+			if (!OwlAI.IS_OWL_IN_OFFICE)
 			{
 				cameraSys.cameraButtonOn.SetActive(true);
 			}
@@ -99,7 +99,7 @@ namespace OneWeekAtPan.Core
 		{
 			cameraAnimator.SetBool("isRight", false);
 
-			if (!OwlAI.owlJumpscare)
+			if (!OwlAI.IS_OWL_IN_OFFICE)
 			{
 				cameraSys.cameraButtonOn.SetActive(true);
 			}
@@ -120,7 +120,7 @@ namespace OneWeekAtPan.Core
 		{
 			cameraAnimator.SetBool("isHideing", false);
 
-			if (!OwlAI.owlJumpscare)
+			if (!OwlAI.IS_OWL_IN_OFFICE)
 			{
 				cameraSys.cameraButtonOn.SetActive(true);
 			}

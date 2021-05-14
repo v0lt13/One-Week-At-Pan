@@ -10,11 +10,11 @@ namespace OneWeekAtPan.AI
 	public class TravisAI : MonoBehaviour
 	{
 		[Header("Variables:")]
-		public static int travisAILevel;
+		public static int TRAVIS_AI_LEVEL;
 		public int currentCamera = 0;
 		public float timeBetwenMovement;
-		public static float minTimeBetwenMovement;
-		public static float maxTimeBetwenMovement;
+		public static float MIN_TIME_BETWEN_MOVEMENT;
+		public static float MAX_TIME_BETWEN_MOVEMENT;
 
 		[Header("Components:")]
 		[SerializeField] private RawImage cameraStatic;
@@ -45,7 +45,7 @@ namespace OneWeekAtPan.AI
 			travisAudioSource = travisObject.GetComponent<AudioSource>();
 
 			AIlevel.TravisMovingTime();
-			timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+			timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 		}
 
 		void Update()
@@ -79,7 +79,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.TravisMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -103,7 +103,7 @@ namespace OneWeekAtPan.AI
 				currentCamera++;
 
 				AIlevel.TravisMovingTime();
-				timeBetwenMovement = Random.Range(minTimeBetwenMovement, maxTimeBetwenMovement);
+				timeBetwenMovement = Random.Range(MIN_TIME_BETWEN_MOVEMENT, MAX_TIME_BETWEN_MOVEMENT);
 
 				Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			}
@@ -127,7 +127,7 @@ namespace OneWeekAtPan.AI
 					animatronic.SetActive(false);
 				}
 
-				Main.isJumpscare = true;
+				Main.IS_JUMPSCARE = true;
 
 				currentCamera++;
 				timeBetwenMovement = 100f;

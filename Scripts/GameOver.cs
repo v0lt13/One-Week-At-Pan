@@ -29,12 +29,12 @@ namespace OneWeekAtPan
 		{
 			Invoke(nameof(SwitchToScene), sceneSwitchTime);
 
-			if (Main.night == 2)
+			if (Main.NIGHT == 2)
 			{
 				tips.Add("Make sure the ovens stay on else Travis will come after you");
 			}
 
-			if (Main.night == 7)
+			if (Main.NIGHT == 7)
 			{
 				tips.Clear();
 			}
