@@ -146,51 +146,53 @@ namespace OneWeekAtPan.Core
 
 		private void SetAIlevel()
 		{
-			if (night == 1)
+			switch (night)
 			{
-				PanAI.panAIlevel = 1;
-				MikeyAI.mikeyAIlevel = 1;
-			}
-			else if (night == 2)
-			{
-				PanAI.panAIlevel = 3;
-				MikeyAI.mikeyAIlevel = 4;
-				TravisAI.travisAILevel = 6;
-			}
-			else if (night == 3)
-			{
-				PanAI.panAIlevel = 5;
-				MikeyAI.mikeyAIlevel = 5;
-				TravisAI.travisAILevel = 8;
-				OwlAI.owlAILevel = 6;
-			}
-			else if (night == 4)
-			{
-				PanAI.panAIlevel = 9;
-				MikeyAI.mikeyAIlevel = 7;
-				TravisAI.travisAILevel = 10;
-				OwlAI.owlAILevel = 8;
-			}
-			else if (night == 5)
-			{
-				PanAI.panAIlevel = 13;
-				MikeyAI.mikeyAIlevel = 15;
-				TravisAI.travisAILevel = 13;
-				OwlAI.owlAILevel = 10;
-			}
-			else if (night == 6)
-			{
-				PanAI.panAIlevel = 15;
-				MikeyAI.mikeyAIlevel = 16;
-				TravisAI.travisAILevel = 15;
-				OwlAI.owlAILevel = 14;
-			}
-			else if (night == 7)
-			{
-				PanAI.panAIlevel = 17;
-				MikeyAI.mikeyAIlevel = 18;
-				TravisAI.travisAILevel = 18;
-				OwlAI.owlAILevel = 19;
+				case 1:
+					PanAI.panAIlevel = 1;
+					MikeyAI.mikeyAIlevel = 1;
+					break;
+
+				case 2:
+					PanAI.panAIlevel = 3;
+					MikeyAI.mikeyAIlevel = 4;
+					TravisAI.travisAILevel = 6;
+					break;
+
+				case 3:
+					PanAI.panAIlevel = 5;
+					MikeyAI.mikeyAIlevel = 5;
+					TravisAI.travisAILevel = 8;
+					OwlAI.owlAILevel = 6;
+					break;
+
+				case 4:
+					PanAI.panAIlevel = 9;
+					MikeyAI.mikeyAIlevel = 7;
+					TravisAI.travisAILevel = 10;
+					OwlAI.owlAILevel = 8;
+					break;
+
+				case 5:
+					PanAI.panAIlevel = 13;
+					MikeyAI.mikeyAIlevel = 15;
+					TravisAI.travisAILevel = 13;
+					OwlAI.owlAILevel = 10;
+					break;
+
+				case 6:
+					PanAI.panAIlevel = 15;
+					MikeyAI.mikeyAIlevel = 16;
+					TravisAI.travisAILevel = 15;
+					OwlAI.owlAILevel = 14;
+					break;
+
+				case 7:
+					PanAI.panAIlevel = 17;
+					MikeyAI.mikeyAIlevel = 18;
+					TravisAI.travisAILevel = 18;
+					OwlAI.owlAILevel = 19;
+					break;
 			}
 		}
 
