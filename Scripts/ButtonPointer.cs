@@ -39,6 +39,18 @@ namespace OneWeekAtPan
 			audioSource.Play();
 		}
 
+		public void OnPointerEnterExtrasButton()
+		{
+			arrows[5].SetActive(true);
+			audioSource.Play();
+		}
+
+		public void OnPointerEnterCustomNightButton()
+		{
+			arrows[6].SetActive(true);
+			audioSource.Play();
+		}
+
 		public void OnPointerExitNewGameButton()
 		{
 			arrows[0].SetActive(false);
@@ -58,6 +70,16 @@ namespace OneWeekAtPan
 		public void OnPointerExitBackButton()
 		{
 			arrows[2].SetActive(false);
+		}
+
+		public void OnPointerExitExtrasButton()
+		{
+			arrows[5].SetActive(false);
+		}
+
+		public void OnPointerExitCustomNightButton()
+		{
+			arrows[6].SetActive(false);
 		}
 	}
 }

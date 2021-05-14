@@ -306,6 +306,16 @@ namespace OneWeekAtPan.Core
 			}
 		}
 
+		public void CustomNight()
+		{
+
+		}
+
+		public void Extras()
+		{
+
+		}
+
 		public void Options()
 		{
 			isMenu = false;

@@ -34,9 +34,11 @@ namespace OneWeekAtPan
 				tips.Add("Make sure the ovens stay on else Travis will come after you");
 			}
 
-			if (Main.NIGHT == 7)
+			if (Main.NIGHT == 7 && Main.NIGHT_HOUR == 3)
 			{
 				tips.Clear();
+				tips.Add("DIE");
+				tipText.color = Color.red;
 			}
 
 			tipNumber = Random.Range(0, tips.Count);

@@ -55,6 +55,10 @@ namespace OneWeekAtPan.AI
 			mikeyObject.SetActive(false);
 			owlObject.SetActive(false);
 
+			cameraStatic.CrossFadeAlpha(100, 0.1f, false);
+			cameraStatic.color = new Color(1, 0, 0, 0.1f);
+
+			Invoke(nameof(StaticEffectToNormalOppacity), 0.5f);
 			StartCoroutine(FlashLightsFastWithSound());
 
 			AIlevel.EyeDemonMovingTime();
