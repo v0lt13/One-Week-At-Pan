@@ -8,7 +8,12 @@ namespace OneWeekAtPan.Core
 {
 	public class MainMenu : MonoBehaviour
 	{
-		public static int STAR_NUMBER = 0;
+		public static bool STAR1 = false;
+		public static bool STAR2 = false;
+		public static bool STAR3 = false;
+		private int star1;
+		private int star2;
+		private int star3;
 		private int vsync;
 		private int fullscreen;
 		private int showFPS;
@@ -55,6 +60,7 @@ namespace OneWeekAtPan.Core
 		void Awake()
 		{
 			SetSettings();
+			SetStars();
 		}
 
 		void Start()
@@ -80,19 +86,18 @@ namespace OneWeekAtPan.Core
 				customNightButtonObject.SetActive(true);
 			}
 
-			if (PlayerPrefs.GetInt("stars") == 1)
+			if (PlayerPrefs.GetInt("star1") == 1)
 			{
 				stars[0].SetActive(true);
 			}
-			else if (PlayerPrefs.GetInt("stars") == 2)
+
+			if (PlayerPrefs.GetInt("star2") == 1)
 			{
-				stars[0].SetActive(true);
 				stars[1].SetActive(true);
 			}
-			else if (PlayerPrefs.GetInt("stars") == 3)
+
+			if (PlayerPrefs.GetInt("star3") == 1)
 			{
-				stars[0].SetActive(true);
-				stars[1].SetActive(true);
 				stars[2].SetActive(true);
 			}
 		}
@@ -308,7 +313,7 @@ namespace OneWeekAtPan.Core
 
 		public void CustomNight()
 		{
-
+			SceneManager.LoadScene("CustomNightMenu");
 		}
 
 		public void Extras()
@@ -391,6 +396,30 @@ namespace OneWeekAtPan.Core
 				controlsToogle.isOn = false;
 				controlsText.text = "Mouse";
 				SwitchControls(false);
+			}
+		}
+
+		private void SetStars()
+		{
+			if (STAR1)
+			{
+				star1 = 1;
+				PlayerPrefs.SetInt("star1", star1);
+				PlayerPrefs.Save();
+			}
+
+			if (STAR2)
+			{
+				star2 = 1;
+				PlayerPrefs.SetInt("star2", star2);
+				PlayerPrefs.Save();
+			}
+
+			if (STAR3)
+			{
+				star3 = 1;
+				PlayerPrefs.SetInt("star3", star3);
+				PlayerPrefs.Save();
 			}
 		}
 

@@ -14,6 +14,7 @@ namespace OneWeekAtPan
 			audioSource = audioObject.GetComponent<AudioSource>();
 		}
 
+		// Pointer enters
 		public void OnPointerEnterNewGameButton()
 		{
 			arrows[0].SetActive(true);
@@ -51,6 +52,7 @@ namespace OneWeekAtPan
 			audioSource.Play();
 		}
 
+		// Pointer exits
 		public void OnPointerExitNewGameButton()
 		{
 			arrows[0].SetActive(false);

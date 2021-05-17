@@ -34,6 +34,11 @@ namespace OneWeekAtPan.Systems
 		[SerializeField] private GameObject cameraSystem;
 		[SerializeField] private GameObject staticEffectObject;
 		[SerializeField] private GameObject officeCamera;
+		[SerializeField] private GameObject chairs;
+		[SerializeField] private GameObject easterEggPan;
+		[SerializeField] private GameObject easterEggMikey;
+		[SerializeField] private GameObject easterEggBlood;
+		[SerializeField] private GameObject easterEggChairs;
 		[Space]
 		[SerializeField] private GameObject[] cameraSystemObjects; // Objects: CameraStatic, Cam01AButton -> Cam07BButton, MAP, RoomName
 		[SerializeField] private GameObject[] cameras; // Objects: Main Camera, Cam01A -> Cam07B
@@ -56,6 +61,32 @@ namespace OneWeekAtPan.Systems
 		void Update()
 		{
 			StaticEffect();
+
+			if (cameraNumber != 10)
+			{
+				easterEggMikey.SetActive(false);
+				easterEggPan.SetActive(false);
+
+				if (main.mikeyAI.currentCamera == 0)
+				{
+					main.mikeyAI.animatronics[0].SetActive(true);
+				}
+
+				if (main.panAI.currentCamera == 0)
+				{
+					main.panAI.animatronics[0].SetActive(true);
+				}
+			}
+
+			if (main.mikeyAI.currentCamera != 0)
+			{
+				easterEggMikey.SetActive(false);
+			}
+
+			if (main.panAI.currentCamera != 0)
+			{
+				easterEggPan.SetActive(false);
+			}
 		}
 
 		public void ActivateCamSys()
@@ -326,6 +357,22 @@ namespace OneWeekAtPan.Systems
 			roomNameText.text = roomName;
 			cameraNumber = 7;
 
+			if (Main.NIGHT >= 2)
+			{
+				int easterEgg = Random.Range(0, 100);
+
+				if (easterEgg == 50)
+				{
+					easterEggChairs.SetActive(true);
+					chairs.SetActive(false);
+				}
+				else
+				{
+					easterEggChairs.SetActive(false);
+					chairs.SetActive(true);
+				}
+			}
+
 			staticEffect.CrossFadeAlpha(100, 0.1f, false);
 			Invoke(nameof(StaticEffectToNormalOppacity), 0.1f);
 
@@ -345,6 +392,17 @@ namespace OneWeekAtPan.Systems
 			roomName = "Restroom";
 			roomNameText.text = roomName;
 			cameraNumber = 8;
+
+			int easterEgg = Random.Range(0, 100);
+
+			if (easterEgg == 50)
+			{
+				easterEggBlood.SetActive(true);
+			}
+			else
+			{
+				easterEggBlood.SetActive(false);
+			}
 
 			staticEffect.CrossFadeAlpha(100, 0.1f, false);
 			Invoke(nameof(StaticEffectToNormalOppacity), 0.1f);
@@ -385,6 +443,26 @@ namespace OneWeekAtPan.Systems
 			roomName = "Stage";
 			roomNameText.text = roomName;
 			cameraNumber = 10;
+
+			if (cameraNumber == 10 && main.panAI.currentCamera == 0 && main.mikeyAI.currentCamera == 0)
+			{
+				int easterEgg = Random.Range(0, 100);
+
+				if (easterEgg == 50)
+				{
+					easterEggMikey.SetActive(true);
+					easterEggPan.SetActive(true);
+					main.panAI.animatronics[0].SetActive(false);
+					main.mikeyAI.animatronics[0].SetActive(false);
+				}
+				else
+				{
+					easterEggMikey.SetActive(false);
+					easterEggPan.SetActive(false);
+					main.panAI.animatronics[0].SetActive(true);
+					main.mikeyAI.animatronics[0].SetActive(true);
+				}
+			}
 
 			staticEffect.CrossFadeAlpha(100, 0.1f, false);
 			Invoke(nameof(StaticEffectToNormalOppacity), 0.1f);

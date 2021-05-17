@@ -15,12 +15,12 @@ namespace OneWeekAtPan.Core
 		private bool isPhoneCallMuted = false;
 
 		[Header("Components:")]
+		[HideInInspector] public PanAI panAI;
+		[HideInInspector] public MikeyAI mikeyAI;
 		[SerializeField] private Text nightHourText;
 		[Space]
 		[SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff, MuteCallButton
 		private CameraSystem cameraSystem;
-		private PanAI panAI;
-		private MikeyAI mikeyAI;
 		private OwlAI owlAI;
 		private EyeDemonAI eyeDemonAI;
 
@@ -332,11 +332,9 @@ namespace OneWeekAtPan.Core
 				amountOfTime = 0f;
 				NIGHT_HOUR = 6;
 
-				if (NIGHT == 7 && MainMenu.STAR_NUMBER == 0)
+				if (NIGHT == 7)
 				{
-					MainMenu.STAR_NUMBER = 1;
-					PlayerPrefs.SetInt("stars", MainMenu.STAR_NUMBER);
-					PlayerPrefs.Save();
+					MainMenu.STAR1 = true;
 				}
 
 				nightHourText.text = $"{NIGHT_HOUR} AM";

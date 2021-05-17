@@ -28,10 +28,10 @@ namespace OneWeekAtPan.AI
 		private AudioSource panAudioSource;
 
 		[Header("GameObjects:")]
+		public GameObject[] animatronics;
 		[SerializeField] private GameObject panObject;
 		[SerializeField] private GameObject mainCameraObject;
 		[SerializeField] private GameObject mainCanvasObject;
-		[SerializeField] private GameObject[] animatronics;
 		[Space]
 		[SerializeField] private GameObject[] roomLights;
 		[SerializeField] private GameObject[] roomObjects;

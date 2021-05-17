@@ -24,9 +24,12 @@ namespace OneWeekAtPan
 
 		[Header("Compenets:")]
 		[SerializeField] private Text tipText;
+		private AudioSource audioSource;
 
 		void Start()
 		{
+			audioSource = GameObject.Find("BG").GetComponent<AudioSource>();
+
 			Invoke(nameof(SwitchToScene), sceneSwitchTime);
 
 			if (Main.NIGHT == 2)
@@ -39,6 +42,13 @@ namespace OneWeekAtPan
 				tips.Clear();
 				tips.Add("DIE");
 				tipText.color = Color.red;
+			}
+
+			int easterEgg = Random.Range(0 , 30);
+
+			if (easterEgg == 25)
+			{
+				audioSource.Play();
 			}
 
 			tipNumber = Random.Range(0, tips.Count);
