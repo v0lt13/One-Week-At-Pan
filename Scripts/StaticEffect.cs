@@ -8,17 +8,8 @@ namespace OneWeekAtPan
 		private int currentTexture;
 		private float timeBetwenTextures;
 
+		[SerializeField] private RawImage staticEffect;
 		[SerializeField] private Texture[] staticEffectTextures;
-		private RawImage staticEffect;
-
-		private GameObject staticEffectObject;
-
-		void Start()
-		{
-			staticEffectObject = GameObject.Find("Static");
-
-			staticEffect = staticEffectObject.GetComponent<RawImage>();
-		}
 
 		void Update()
 		{

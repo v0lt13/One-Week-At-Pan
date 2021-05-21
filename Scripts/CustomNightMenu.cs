@@ -36,7 +36,7 @@ namespace OneWeekAtPan
 
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				SceneManager.LoadScene("MainMenu");
+				GoToMainMenu();
 			}
 		}
 
