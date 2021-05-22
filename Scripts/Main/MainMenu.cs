@@ -309,6 +309,11 @@ namespace OneWeekAtPan.Core
 			SceneManager.LoadScene("CustomNightMenu");
 		}
 
+		public void DiscordButton()
+		{
+			Application.OpenURL("https://discord.gg/jKXvXyTzYn");
+		}
+
 		public void Extras()
 		{
 			SceneManager.LoadScene("ExtrasMenu");

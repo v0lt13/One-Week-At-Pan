@@ -62,30 +62,33 @@ namespace OneWeekAtPan.Systems
 		{
 			StaticEffect();
 
-			if (cameraNumber != 10)
+			if (!CustomNight.IS_CUSTOM_NIGHT)
 			{
-				easterEggMikey.SetActive(false);
-				easterEggPan.SetActive(false);
-
-				if (main.mikeyAI.currentCamera == 0)
+				if (cameraNumber != 10)
 				{
-					main.mikeyAI.animatronics[0].SetActive(true);
+					easterEggMikey.SetActive(false);
+					easterEggPan.SetActive(false);
+
+					if (main.mikeyAI.currentCamera == 0)
+					{
+						main.mikeyAI.animatronics[0].SetActive(true);
+					}
+
+					if (main.panAI.currentCamera == 0)
+					{
+						main.panAI.animatronics[0].SetActive(true);
+					}
 				}
 
-				if (main.panAI.currentCamera == 0)
+				if (main.mikeyAI.currentCamera != 0)
 				{
-					main.panAI.animatronics[0].SetActive(true);
+					easterEggMikey.SetActive(false);
 				}
-			}
 
-			if (main.mikeyAI.currentCamera != 0)
-			{
-				easterEggMikey.SetActive(false);
-			}
-
-			if (main.panAI.currentCamera != 0)
-			{
-				easterEggPan.SetActive(false);
+				if (main.panAI.currentCamera != 0)
+				{
+					easterEggPan.SetActive(false);
+				}
 			}
 		}
 
@@ -393,15 +396,18 @@ namespace OneWeekAtPan.Systems
 			roomNameText.text = roomName;
 			cameraNumber = 8;
 
-			int easterEgg = Random.Range(0, 100);
+			if (!CustomNight.IS_CUSTOM_NIGHT)
+			{
+				int easterEgg = Random.Range(0, 100);
 
-			if (easterEgg == 50)
-			{
-				easterEggBlood.SetActive(true);
-			}
-			else
-			{
-				easterEggBlood.SetActive(false);
+				if (easterEgg == 50)
+				{
+					easterEggBlood.SetActive(true);
+				}
+				else
+				{
+					easterEggBlood.SetActive(false);
+				}
 			}
 
 			staticEffect.CrossFadeAlpha(100, 0.1f, false);
@@ -444,23 +450,26 @@ namespace OneWeekAtPan.Systems
 			roomNameText.text = roomName;
 			cameraNumber = 10;
 
-			if (cameraNumber == 10 && main.panAI.currentCamera == 0 && main.mikeyAI.currentCamera == 0)
+			if (!CustomNight.IS_CUSTOM_NIGHT)
 			{
-				int easterEgg = Random.Range(0, 100);
+				if (cameraNumber == 10 && main.panAI.currentCamera == 0 && main.mikeyAI.currentCamera == 0)
+				{
+					int easterEgg = Random.Range(0, 100);
 
-				if (easterEgg == 50)
-				{
-					easterEggMikey.SetActive(true);
-					easterEggPan.SetActive(true);
-					main.panAI.animatronics[0].SetActive(false);
-					main.mikeyAI.animatronics[0].SetActive(false);
-				}
-				else
-				{
-					easterEggMikey.SetActive(false);
-					easterEggPan.SetActive(false);
-					main.panAI.animatronics[0].SetActive(true);
-					main.mikeyAI.animatronics[0].SetActive(true);
+					if (easterEgg == 50)
+					{
+						easterEggMikey.SetActive(true);
+						easterEggPan.SetActive(true);
+						main.panAI.animatronics[0].SetActive(false);
+						main.mikeyAI.animatronics[0].SetActive(false);
+					}
+					else
+					{
+						easterEggMikey.SetActive(false);
+						easterEggPan.SetActive(false);
+						main.panAI.animatronics[0].SetActive(true);
+						main.mikeyAI.animatronics[0].SetActive(true);
+					}
 				}
 			}
 

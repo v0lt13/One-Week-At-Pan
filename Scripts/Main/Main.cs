@@ -103,13 +103,13 @@ namespace OneWeekAtPan.Core
 			NightTime();
 
 			// Used to skip the nights, DEBUG ONLY
-			if (Input.GetKey(KeyCode.LeftShift))
+			/*if (Input.GetKey(KeyCode.LeftShift))
 			{
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					SceneManager.LoadScene("6AM");
 				}
-			}
+			}*/
 
 			if (PauseMenu.IS_PAUSED && !isPhoneCallMuted)
 			{

@@ -57,13 +57,13 @@ namespace OneWeekAtPan
 			NightTime();
 
 			// Used to skip the night, DEBUG ONLY
-			if (Input.GetKey(KeyCode.LeftShift))
+			/*if (Input.GetKey(KeyCode.LeftShift))
 			{
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
 					SceneManager.LoadScene("CN 6AM");
 				}
-			}
+			}*/
 		}
 
 		private void NightTime()
