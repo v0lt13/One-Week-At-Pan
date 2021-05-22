@@ -252,13 +252,13 @@ namespace OneWeekAtPan.AI
 			{
 				cameraStatic.CrossFadeAlpha(100, 0.1f, false);
 
-				cameraSys.cameraButtonOn.SetActive(false);
-				cameraSys.cameraButtonOff.SetActive(false);
-
 				if (cameraSys.isCameraActive)
 				{
 					cameraSys.DeactivateCamSys();
 				}
+
+				cameraSys.cameraButtonOn.SetActive(false);
+				cameraSys.cameraButtonOff.SetActive(false);
 
 				IS_OWL_IN_OFFICE = true;
 

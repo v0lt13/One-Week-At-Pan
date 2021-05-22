@@ -37,7 +37,7 @@ namespace OneWeekAtPan
 				tips.Add("Make sure the ovens stay on else Travis will come after you");
 			}
 
-			if (Main.NIGHT == 7 && Main.NIGHT_HOUR >= 3)
+			if (Main.NIGHT == 7 && Main.NIGHT_HOUR >= 3 && Main.NIGHT_HOUR != 12)
 			{
 				tips.Clear();
 				tips.Add("DIE");
