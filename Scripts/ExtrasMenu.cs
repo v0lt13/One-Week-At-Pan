@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using OneWeekAtPan.CN;
 using UnityEngine.SceneManagement;
 
 namespace OneWeekAtPan
@@ -19,6 +20,8 @@ namespace OneWeekAtPan
 		[SerializeField] private GameObject jumpscaresExtras;
 		[SerializeField] private GameObject creditsExtras;
 		[SerializeField] private GameObject otherExtras;
+		[SerializeField] private GameObject hardcoreMode;
+		[SerializeField] private GameObject hardcoreModeLocked;
 		[Space]
 		[SerializeField] private GameObject[] animatronics;
 		[SerializeField] private GameObject[] otherStuff;
@@ -106,6 +109,22 @@ namespace OneWeekAtPan
 			otherExtras.SetActive(true);
 		}
 
+		public void Hardcore()
+		{
+			audioSource.Play();
+
+			DisableAllExtras();
+
+			if (PlayerPrefs.GetInt("Cn") == 1)
+			{
+				hardcoreMode.SetActive(true);
+			}
+			else
+			{
+				hardcoreModeLocked.SetActive(true);
+			}
+		}
+
 		// Side buttons
 		public void GoToJumpscares()
 		{
@@ -176,6 +195,11 @@ namespace OneWeekAtPan
 			ToogleObjects(otherStuff, currentOther);
 		}
 
+		public void StartHardcore()
+		{
+			SceneManager.LoadScene("Night01S_H");
+		}
+
 		private void ToogleObjects(GameObject[] objects, int objectNumber)
 		{
 			foreach (var @object in objects)
@@ -192,6 +216,8 @@ namespace OneWeekAtPan
 			jumpscaresExtras.SetActive(false);
 			creditsExtras.SetActive(false);
 			otherExtras.SetActive(false);
+			hardcoreMode.SetActive(false);
+			hardcoreModeLocked.SetActive(false);
 		}
     }
 }

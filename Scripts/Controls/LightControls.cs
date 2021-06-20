@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OneWeekAtPan
+namespace OneWeekAtPan.GameControls
 {
 	public class LightControls : MonoBehaviour
 	{

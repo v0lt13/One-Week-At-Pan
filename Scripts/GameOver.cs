@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using OneWeekAtPan.Core;
+using OneWeekAtPan.Hardcore;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,7 @@ namespace OneWeekAtPan
 		"Dont die",
 		"Feedback from our studies have indicated that if you utilize your brain it's much easier to play this game",
 		"If you see a small light flicker in the room that means an animatronic is at the door"
-	};
+		};
 
 		[Header("Compenets:")]
 		[SerializeField] private Text tipText;
@@ -43,6 +44,8 @@ namespace OneWeekAtPan
 				tips.Add("DIE");
 				tipText.color = Color.red;
 			}
+
+			HardcoreMode.NIGHT = 1;
 
 			int easterEgg = Random.Range(0 , 30);
 

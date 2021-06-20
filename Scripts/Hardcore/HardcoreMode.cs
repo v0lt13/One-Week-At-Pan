@@ -1,36 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 using OneWeekAtPan.AI;
-using OneWeekAtPan.Systems;
+using OneWeekAtPan.Core;
 using UnityEngine.SceneManagement;
 
-namespace OneWeekAtPan.Core
+namespace OneWeekAtPan.Hardcore
 {
-	public class Main : MonoBehaviour
+	public class HardcoreMode : MonoBehaviour
 	{
 		public static bool IS_JUMPSCARE = false;
 		public static int NIGHT = 1;
 		public static int NIGHT_HOUR = 12;
 		[SerializeField] private float amountOfTime;
-		private bool isPhoneCallMuted = false;
 
 		[Header("Components:")]
 		[HideInInspector] public PanAI panAI;
 		[HideInInspector] public MikeyAI mikeyAI;
 		[SerializeField] private Text nightHourText;
 		[Space]
-		[SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff, MuteCallButton
-		private CameraSystem cameraSystem;
+		[SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff
 		private OwlAI owlAI;
 		private EyeDemonAI eyeDemonAI;
 
 		[Header("GameObjects:")]
-		[SerializeField] private GameObject callButton;
 		[SerializeField] private GameObject framerate;
 		[SerializeField] private GameObject owlObject;
 		[SerializeField] private GameObject eyeDemonObject;
-		[Space]
-		[SerializeField] private GameObject[] callObjects; // Objetcs: Call, MuteCallButton
 		private GameObject mikeyObject;
 		private GameObject panObject;
 
@@ -40,11 +35,6 @@ namespace OneWeekAtPan.Core
 			NIGHT_HOUR = 12;
 			IS_JUMPSCARE = false;
 			OwlAI.IS_OWL_IN_OFFICE = false;
-
-			if (PlayerPrefs.GetInt("Night") != 0)
-			{
-				NIGHT = PlayerPrefs.GetInt("Night");
-			}
 
 			if (NIGHT == 8)
 			{
@@ -78,7 +68,6 @@ namespace OneWeekAtPan.Core
 			mikeyObject = GameObject.Find("Mikey");
 			panObject = GameObject.Find("Pan");
 
-			cameraSystem = GetComponent<CameraSystem>();
 			mikeyAI = mikeyObject.GetComponent<MikeyAI>();
 			panAI = panObject.GetComponent<PanAI>();
 
@@ -91,9 +80,6 @@ namespace OneWeekAtPan.Core
 			{
 				eyeDemonAI = eyeDemonObject.GetComponent<EyeDemonAI>();
 			}
-
-			Invoke(nameof(ActivateCallButton), 7f);
-			Invoke(nameof(RemoveCallButton), 20f);
 		}
 
 		void Update()
@@ -107,40 +93,23 @@ namespace OneWeekAtPan.Core
 			{
 				if (Input.GetKeyDown(KeyCode.Q))
 				{
-					SceneManager.LoadScene("6AM");
+					SceneManager.LoadScene("6AM_H");
 				}
 			}*/
 
-			if (PauseMenu.IS_PAUSED && !isPhoneCallMuted)
+			if (PauseMenu.IS_PAUSED)
 			{
-				GameObject.Find("Call").GetComponent<AudioSource>().Pause();
-
 				foreach (var button in buttons)
 				{
 					button.interactable = false;
 				}
 			}
-			else if (!PauseMenu.IS_PAUSED && !isPhoneCallMuted)
+			else if (!PauseMenu.IS_PAUSED)
 			{
-				GameObject.Find("Call").GetComponent<AudioSource>().UnPause();
-
 				foreach (var button in buttons)
 				{
 					button.interactable = true;
 				}
-			}
-		}
-
-		public void MuteCall()
-		{
-			cameraSystem.mainAudioSource.clip = cameraSystem.mainAudioClip[2];
-			cameraSystem.mainAudioSource.Play();
-
-			isPhoneCallMuted = true;
-
-			foreach (var call in callObjects)
-			{
-				call.SetActive(false);
 			}
 		}
 
@@ -334,22 +303,12 @@ namespace OneWeekAtPan.Core
 
 				if (NIGHT == 7)
 				{
-					MainMenu.STAR1 = true;
+					MainMenu.STAR3 = true;
 				}
 
 				nightHourText.text = $"{NIGHT_HOUR} AM";
-				SceneManager.LoadSceneAsync("6AM");
+				SceneManager.LoadSceneAsync("6AM_H");
 			}
-		}
-
-		private void ActivateCallButton()
-		{
-			callButton.SetActive(true);
-		}
-
-		private void RemoveCallButton()
-		{
-			callButton.SetActive(false);
 		}
 	}
 }

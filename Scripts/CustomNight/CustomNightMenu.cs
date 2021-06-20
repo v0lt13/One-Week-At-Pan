@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using OneWeekAtPan.AI;
 using UnityEngine.SceneManagement;
 
-namespace OneWeekAtPan
+namespace OneWeekAtPan.CN
 {
     public class CustomNightMenu : MonoBehaviour
     {

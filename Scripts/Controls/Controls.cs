@@ -1,31 +1,20 @@
 using UnityEngine;
 using OneWeekAtPan.Core;
-using OneWeekAtPan.Systems;
 
-namespace OneWeekAtPan
+namespace OneWeekAtPan.GameControls
 {
 	public class Controls : MonoBehaviour
 	{
 		private int heKnowsHowToPlayKeyboard = 0;
 		private int heKnowsHowToPlayMouse = 0;
 
-		private CameraSystem cameraSys;
-
 		public GameObject keyboardControls;
 		public GameObject mouseControls;
-		[SerializeField] private GameObject mainCanvas;
 
 		void Start()
 		{
-			cameraSys = mainCanvas.GetComponent<CameraSystem>();
-
 			if (MainCamera.IS_MOUSE_CONTROLS)
 			{
-				foreach (var triggers in cameraSys.lookTriggers)
-				{
-					triggers.SetActive(true);
-				}
-
 				if (PlayerPrefs.GetInt("heKnowsMouse") == 0)
 				{
 					mouseControls.SetActive(true);
@@ -33,11 +22,6 @@ namespace OneWeekAtPan
 			}
 			else
 			{
-				foreach (var triggers in cameraSys.lookTriggers)
-				{
-					triggers.SetActive(false);
-				}
-
 				if (PlayerPrefs.GetInt("heKnowsKeyboard") == 0)
 				{
 					keyboardControls.SetActive(true);

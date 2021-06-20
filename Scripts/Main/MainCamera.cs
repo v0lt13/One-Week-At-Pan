@@ -40,6 +40,24 @@ namespace OneWeekAtPan.Core
 			if (isCrouching)
 			{
 				crouchTime -= Time.deltaTime;
+
+				if (IS_MOUSE_CONTROLS)
+				{
+					foreach (var trigger in cameraSys.lookTriggers)
+					{
+						trigger.SetActive(false);
+					}
+				}
+			}
+			else
+			{
+				if (IS_MOUSE_CONTROLS)
+				{
+					foreach (var trigger in cameraSys.lookTriggers)
+					{
+						trigger.SetActive(true);
+					}
+				}
 			}
 
 			if (Input.GetKeyDown(KeyCode.A) && cameraSys.isCameraActive == false && !cameraAnimator.GetBool("isLeft") && !cameraAnimator.GetBool("isRight") && !cameraAnimator.GetBool("isHideing") && !Main.IS_JUMPSCARE && !PauseMenu.IS_PAUSED && !IS_MOUSE_CONTROLS)
@@ -83,7 +101,7 @@ namespace OneWeekAtPan.Core
 		{
 			cameraAnimator.SetBool("isLeft", false);
 
-			if (!OwlAI.IS_OWL_IN_OFFICE)
+			if (!OwlAI.IS_OWL_IN_OFFICE && !Main.IS_JUMPSCARE && !isCrouching)
 			{
 				cameraSys.cameraButtonOn.SetActive(true);
 			}
@@ -99,7 +117,7 @@ namespace OneWeekAtPan.Core
 		{
 			cameraAnimator.SetBool("isRight", false);
 
-			if (!OwlAI.IS_OWL_IN_OFFICE)
+			if (!OwlAI.IS_OWL_IN_OFFICE && !Main.IS_JUMPSCARE && !isCrouching)
 			{
 				cameraSys.cameraButtonOn.SetActive(true);
 			}

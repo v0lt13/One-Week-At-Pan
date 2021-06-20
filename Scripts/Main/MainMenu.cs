@@ -10,8 +10,10 @@ namespace OneWeekAtPan.Core
 	{
 		public static bool STAR1 = false;
 		public static bool STAR2 = false;
+		public static bool STAR3 = false;
 		private int star1;
 		private int star2;
+		private int star3;
 		private int vsync;
 		private int fullscreen;
 		private int showFPS;
@@ -92,6 +94,11 @@ namespace OneWeekAtPan.Core
 			if (PlayerPrefs.GetInt("star2") == 1)
 			{
 				stars[1].SetActive(true);
+			}
+
+			if (PlayerPrefs.GetInt("star3") == 1)
+			{
+				stars[2].SetActive(true);
 			}
 		}
 
@@ -410,6 +417,13 @@ namespace OneWeekAtPan.Core
 			{
 				star2 = 1;
 				PlayerPrefs.SetInt("star2", star2);
+				PlayerPrefs.Save();
+			}
+
+			if (STAR3)
+			{
+				star3 = 1;
+				PlayerPrefs.SetInt("star3", star3);
 				PlayerPrefs.Save();
 			}
 		}

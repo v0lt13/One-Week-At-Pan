@@ -4,20 +4,22 @@ using OneWeekAtPan.AI;
 using OneWeekAtPan.Core;
 using UnityEngine.SceneManagement;
 
-namespace OneWeekAtPan
+namespace OneWeekAtPan.CN
 {
     public class CustomNight : MonoBehaviour
     {
 		public static bool IS_JUMPSCARE = false;
 		public static bool IS_CUSTOM_NIGHT = true;
+		public static bool IS_CUSTOM_NIGHT_COMPLETED = false;
 		public static int NIGHT_HOUR = 12;
 		[SerializeField] private float amountOfTime;
+		private int isCustomNightCompleted;
 
 		[Header("Components:")]
 		[SerializeField] private Text nightHourText;
 		[SerializeField] private Text timeText;
 		[Space]
-		[SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff, MuteCallButton
+		[SerializeField] private Button[] buttons; // Buttons: Cam01AButton -> Cam07BButton, CamButtonOn, CamButtonOff
 
 		[Header("GameObjects:")]
 		[SerializeField] private GameObject framerate;
@@ -43,10 +45,10 @@ namespace OneWeekAtPan
 			PlayerPrefs.DeleteKey("camName");
 
 			// For debug
-			print(PanAI.PAN_AI_LEVEL);
-			print(MikeyAI.MIKEY_AI_LEVEL);
-			print(TravisAI.TRAVIS_AI_LEVEL);
-			print(OwlAI.OWL_AI_LEVEL);
+			//print(PanAI.PAN_AI_LEVEL);
+			//print(MikeyAI.MIKEY_AI_LEVEL);
+			//print(TravisAI.TRAVIS_AI_LEVEL);
+			//print(OwlAI.OWL_AI_LEVEL);
 		}
 
 		void Update()
@@ -64,6 +66,21 @@ namespace OneWeekAtPan
 					SceneManager.LoadScene("CN 6AM");
 				}
 			}*/
+
+			if (PauseMenu.IS_PAUSED)
+			{
+				foreach (var button in buttons)
+				{
+					button.interactable = false;
+				}
+			}
+			else if (!PauseMenu.IS_PAUSED)
+			{
+				foreach (var button in buttons)
+				{
+					button.interactable = true;
+				}
+			}
 		}
 
 		private void NightTime()
@@ -111,6 +128,11 @@ namespace OneWeekAtPan
 				if (PanAI.PAN_AI_LEVEL == 20 && MikeyAI.MIKEY_AI_LEVEL == 20 && TravisAI.TRAVIS_AI_LEVEL == 20 && OwlAI.OWL_AI_LEVEL == 20)
 				{
 					MainMenu.STAR2 = true;
+					IS_CUSTOM_NIGHT_COMPLETED = true;
+
+					isCustomNightCompleted = 1;
+					PlayerPrefs.SetInt("Cn", isCustomNightCompleted);
+					PlayerPrefs.Save();
 				}
 
 				nightHourText.text = $"{NIGHT_HOUR} AM";

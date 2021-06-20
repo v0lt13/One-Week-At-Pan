@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using OneWeekAtPan.CN;
 using OneWeekAtPan.Core;
+using OneWeekAtPan.GameControls;
 
 namespace OneWeekAtPan.Systems
 {
@@ -56,6 +58,21 @@ namespace OneWeekAtPan.Systems
 				heatSystem = GetComponent<HeatSystem>();
 				lightControls = GetComponent<LightControls>();
 			}
+
+			if (MainCamera.IS_MOUSE_CONTROLS)
+			{
+				foreach (var triggers in lookTriggers)
+				{
+					triggers.SetActive(true);
+				}
+			}
+			else
+			{
+				foreach (var triggers in lookTriggers)
+				{
+					triggers.SetActive(false);
+				}
+			}
 		}
 
 		void Update()
@@ -88,6 +105,14 @@ namespace OneWeekAtPan.Systems
 				if (main.panAI.currentCamera != 0)
 				{
 					easterEggPan.SetActive(false);
+				}
+			}
+
+			if (Main.IS_JUMPSCARE || CustomNight.IS_JUMPSCARE)
+			{
+				foreach (var trigger in lookTriggers)
+				{
+					trigger.SetActive(false);
 				}
 			}
 		}
